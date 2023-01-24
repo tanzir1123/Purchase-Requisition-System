@@ -114,6 +114,7 @@ class PrItem(models.Model):
     pr_item_id = models.CharField(primary_key=True, max_length=15)
     pr_id = models.ForeignKey(PR, on_delete=models.CASCADE)
     pr_item_name = models.CharField(max_length=40, null=True)
+    pr_item_unit_price = models.FloatField(default=None, null=True)
     pr_item_qty = models.PositiveIntegerField(default=None, null=True)
     pr_item_price = models.FloatField(default=None, null=True)
     pr_item_description = models.CharField(max_length=100, default=None, null=True, blank = True)
@@ -122,8 +123,49 @@ class PrItem(models.Model):
     def save(self, *args, **kwargs):
         if not self.pr_item_id.startswith('PRItem'):
             self.pr_item_id = 'PRItem' + self.pr_item_id
+        self.pr_item_price = self.pr_item_unit_price * self.pr_item_qty
         super().save(*args, **kwargs)
     
     def __str__(self):
         return str(self.pr_item_id)
 
+class Quotation(models.Model):
+    quotation_id = models.CharField(primary_key=True, max_length=15)
+    pr_id = models.ForeignKey(PR, on_delete=models.CASCADE)
+    vendor_id = models.ForeignKey(Vendor, on_delete=models.SET_NULL)
+    APPROVAL_STATUS_CHOICES = [
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+        ('Pending', 'Pending'),
+    ]
+    approval_status = models.CharField(max_length=20, choices = APPROVAL_STATUS_CHOICES, default='Pending')
+    checked_by = models.ForeignKey(Purchaser, default= None, on_delete=models.SET_NULL, null=True, blank = True)
+    total_price = models.FloatField(default=None, null=True)
+    date_of_expiry = models.DateField()
+    q_payment_terms = models.CharField(max_length = 100, null=True, blank=True)
+    def save(self, *args, **kwargs):
+        if not self.quotation_id.startswith('Q'):
+            self.quotation_id = 'Q' + self.quotation_id
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return str(self.quotation_id)
+
+class QuotationItem(models.Model):
+    q_item_id = models.CharField(primary_key=True, max_length=15)
+    quotation_id = models.ForeignKey(Quotation, on_delete=models.CASCADE)
+    q_item_name = models.CharField(max_length=20, null=True)
+    q_item_unit_price = models.FloatField(default=None, null=True)
+    q_item_qty = models.PositiveIntegerField(default=None, null=True)
+    q_item_price = models.FloatField(default=None, null=True)
+
+    #Saving with the prefix in the database.
+    def save(self, *args, **kwargs):
+        if not self.q_item_id.startswith('QItem'):
+            self.q_item_id = 'QItem' + self.q_item_id
+        #Saving the Q_Item_Price
+        self.q_item_price = self.q_item_unit_price * self.q_item_qty
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return str(self.q_item_id)
