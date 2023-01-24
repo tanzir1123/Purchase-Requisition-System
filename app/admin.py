@@ -30,3 +30,5 @@ class FinanceOfficerAdmin(admin.ModelAdmin):
 admin.site.register(FinanceOfficer, FinanceOfficerAdmin)
 admin.site.register(PR)
 admin.site.register(PrItem)
+admin.site.register(Quotation)
+admin.site.register(QuotationItem)

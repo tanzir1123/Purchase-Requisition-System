@@ -116,7 +116,7 @@ class PrItem(models.Model):
     pr_item_name = models.CharField(max_length=40, null=True)
     pr_item_unit_price = models.FloatField(default=None, null=True)
     pr_item_qty = models.PositiveIntegerField(default=None, null=True)
-    pr_item_price = models.FloatField(default=None, null=True)
+    pr_item_price = models.FloatField(blank=True)
     pr_item_description = models.CharField(max_length=100, default=None, null=True, blank = True)
     
     #Saving with the prefix in the database.
@@ -132,7 +132,7 @@ class PrItem(models.Model):
 class Quotation(models.Model):
     quotation_id = models.CharField(primary_key=True, max_length=15)
     pr_id = models.ForeignKey(PR, on_delete=models.CASCADE)
-    vendor_id = models.ForeignKey(Vendor, on_delete=models.SET_NULL)
+    vendor_id = models.ForeignKey(Vendor, default= None, on_delete=models.PROTECT, null=True, blank = True)
     APPROVAL_STATUS_CHOICES = [
         ('Approved', 'Approved'),
         ('Rejected', 'Rejected'),
@@ -157,7 +157,7 @@ class QuotationItem(models.Model):
     q_item_name = models.CharField(max_length=20, null=True)
     q_item_unit_price = models.FloatField(default=None, null=True)
     q_item_qty = models.PositiveIntegerField(default=None, null=True)
-    q_item_price = models.FloatField(default=None, null=True)
+    q_item_price = models.FloatField(blank=True)
 
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):
