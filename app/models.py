@@ -116,7 +116,7 @@ class PrItem(models.Model):
     pr_item_name = models.CharField(max_length=40, null=True)
     pr_item_unit_price = models.FloatField(default=None, null=True)
     pr_item_qty = models.PositiveIntegerField(default=None, null=True)
-    pr_item_price = models.FloatField(blank=True)
+    pr_item_price = models.FloatField(default=None, null=True, blank=True)
     pr_item_description = models.CharField(max_length=100, default=None, null=True, blank = True)
     
     #Saving with the prefix in the database.
@@ -157,7 +157,7 @@ class QuotationItem(models.Model):
     q_item_name = models.CharField(max_length=20, null=True)
     q_item_unit_price = models.FloatField(default=None, null=True)
     q_item_qty = models.PositiveIntegerField(default=None, null=True)
-    q_item_price = models.FloatField(blank=True)
+    q_item_price = models.FloatField(default=None, null=True,blank=True)
 
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):
@@ -169,3 +169,36 @@ class QuotationItem(models.Model):
     
     def __str__(self):
         return str(self.q_item_id)
+
+
+class PurchaseOrder(models.Model):
+    po_id = models.CharField(primary_key=True, max_length=15)
+    financeOfficerId = models.ForeignKey(FinanceOfficer, default= None, on_delete=models.SET_NULL, null=True, blank = True)
+    pr_id = models.ForeignKey(PR, on_delete=models.CASCADE)
+    quotation_id = models.ForeignKey(Quotation, on_delete=models.CASCADE)
+    total_price = models.FloatField(null=True, blank=True) 
+    date_created = models.DateField()
+    q_payment_terms = models.CharField(max_length = 100, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.po_id)
+
+class POItem(models.Model):
+    po_item_id = models.CharField(primary_key=True, max_length=15)
+    po_id = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
+    po_item_name = models.CharField(max_length=20, null=True)
+    po_unit_price = models.FloatField(default=None, null=True)
+    po_item_qty = models.PositiveIntegerField(default=None, null=True)
+    po_item_price = models.FloatField(default=None, null=True,blank=True)
+
+# Saving with the prefix in the database.
+    def save(self, *args, **kwargs):
+        if not self.po_item_id.startswith('POItem'):
+            self.po_item_id = 'POItem' + self.po_item_id
+        #Saving the Q_Item_Price
+        self.q_item_price = self.po_unit_price * self.po_item_qty
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+       return str(self.po_item_id)
+
