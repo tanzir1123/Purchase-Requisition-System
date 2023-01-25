@@ -37,11 +37,21 @@ urlpatterns = [
         LogoutView.as_view(template_name = 'app/index.html'),
         name='logout'),
     re_path(r'^dashboard$', main_views.dashboard, name='dashboard'),
+
+
+    # viewsItem views
+    # manager views
     re_path(r'^managerviewpr$', viewItemview.managerviewpr, name='managerviewpr'),
-
     path('prdetails/<str:pr_id>/', viewItemview.managerviewprdetails, name='managerviewprdetails'),
+    path('manager_approve_pr', viewItemview.manager_approve_pr, name='manager_approve_pr'),
+    path('prdetails_approve/<str:pr_id>/', viewItemview.manager_approve_pr_details, name='manager_approve_pr_details'),
+    # update 
+    path('update_PR/', viewItemview.update_PR, name='update_PR'),
 
-    re_path(r'^additemform$', additem_views.additemform, name='additem_form'),
-    re_path(r'^additemconfirmation$', additem_views.additemconfirmation, name='additem_confirmation'),
 
+    # addItem views
+    # re_path(r'^additemform$', additem_views.additemform, name='additem_form'),
+    # re_path(r'^additemconfirmation$', additem_views.additemconfirmation, name='additem_confirmation'),
+    path('createpr/', additem_views.create_pr, name='create_pr')
+    # re_path(r'^add_pr_item$', additem_views.add_pr_item, name='add_pr_item')
 ]

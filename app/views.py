@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
-from .models import Manager
+from .models import *
+
 
 from django.contrib.auth.decorators import login_required
 
@@ -51,23 +52,34 @@ def about(request):
 
 @login_required
 def dashboard(request):
-    
+    is_employee = request.user.groups.filter(name ='Employee').exists()
     is_manager = request.user.groups.filter(name='Manager').exists()
-    
-    # if(is_vendor == True):
-    #     mydata = Salesman.objects.get(user=request.user).salesman_id
-    # if(is_employee == True):
-    #     mydata = Customer.objects.get(user=request.user).customer_id
-    if(is_manager == True):
+    is_vendor = request.user.groups.filter(name='Vendor').exists()
+    is_purchaser = request.user.groups.filter(name='Purchaser').exists()
+    is_finance_officer = request.user.groups.filter(name='FinanceOfficer').exists()
+
+    if(is_employee == True):
+        mydata = Employee.objects.get(user=request.user).employee_id
+    elif(is_manager == True):
         mydata = Manager.objects.get(user=request.user).manager_id
-        print(mydata)
-    # if(is_finance_officer == True):
-    #     mydata = FinanceOfficer.objects.get(user=request.user).finance_officer_id  
+    elif(is_vendor == True):
+        mydata = Vendor.objects.get(user=request.user).vendor_id
+    elif(is_purchaser == True):
+        mydata = Purchaser.objects.get(user=request.user).purchaser_id
+    elif(is_finance_officer == True):
+        mydata = FinanceOfficer.objects.get(user=request.user).financeofficer_id  
     
+    print(mydata)
     context = {
-            'mydata': mydata,
-            'is_manager': is_manager
+            'user_data' : mydata,
+            'is_employee' : is_employee,
+            'is_manager': is_manager,
+            'is_vendor': is_vendor,
+            'is_purchaser': is_purchaser,
+            'is_finance_officer': is_finance_officer
         }
-    context['user'] = request.user
+    # context['user'] = request.user
 
     return render(request,'app/dashboard.html',context)
+
+    

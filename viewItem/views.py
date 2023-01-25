@@ -1,6 +1,8 @@
 from urllib import request
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from django.http import HttpRequest
@@ -21,3 +23,35 @@ def managerviewprdetails(request, pr_id):
     pr_items = PrItem.objects.filter(pr_id=pr_id)
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'manager/prdetails.html', context)
+
+def manager_approve_pr(request):
+    pr_list = PR.objects.filter(approval_status__in=['Pending']).values()
+    context = {'pr_list': pr_list}
+    return render(request, 'manager/managerapprovepr.html', context)
+
+def manager_approve_pr_details(request, pr_id):
+    pr = PR.objects.get(pr_id=pr_id)
+    pr_items = PrItem.objects.filter(pr_id=pr_id)
+
+    context = {'pr': pr, 'pr_items': pr_items}
+    return render(request, 'manager/prdetails_approve.html', context)
+
+
+@csrf_exempt
+def update_PR(request):
+    if request.method == 'POST':
+        pr_id = request.POST.get('pr_id')
+        status_type = request.POST.get('status_type')
+        remark = request.POST.get('remark')
+
+        print(status_type +" "+ remark)
+
+        if status_type == 'Approve':
+            PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
+            PR.objects.filter(pr_id=pr_id).update(manager_remark=remark)
+        elif status_type == 'Reject':
+            PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
+            PR.objects.filter(pr_id=pr_id).update(manager_remark=remark)
+        return JsonResponse("Status saved", safe=False)
+    else:
+        return HttpResponseBadRequest("Invalid request method")

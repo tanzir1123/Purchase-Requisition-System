@@ -19,7 +19,8 @@ class Employee(models.Model):
     employee_id = models.CharField(primary_key=True, max_length=15)
     employee_name = models.CharField(max_length=40, null = True)
     employee_contact = models.CharField(max_length=15, null = True, blank = True)
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):
         if not self.employee_id.startswith('E'):
@@ -98,7 +99,7 @@ class PR(models.Model):
     ]
     approval_status = models.CharField(max_length=20, choices = APPROVAL_STATUS_CHOICES, default='Pending')
     marked_by = models.ForeignKey(Manager, default= None, on_delete=models.SET_NULL, null=True, blank = True)
-    manager_remark = models.CharField(max_length=200,null=True, blank = True)
+    manager_remark = models.CharField(max_length=200,default = None, null=True, blank = True)
     date_created = models.DateField()
 
     #Saving with the prefix in the database.
@@ -139,7 +140,7 @@ class Quotation(models.Model):
     checked_by = models.ForeignKey(Purchaser, default= None, on_delete=models.SET_NULL, null=True, blank = True)
     total_price = models.FloatField(default=None, null=True)
     date_of_expiry = models.DateField()
-    q_payment_terms = models.CharField(max_length = 100, null=True, blank=True)
+    q_payment_terms = models.CharField(max_length = 100, default = None, null=True, blank=True)
     def save(self, *args, **kwargs):
         if not self.quotation_id.startswith('Q'):
             self.quotation_id = 'Q' + self.quotation_id

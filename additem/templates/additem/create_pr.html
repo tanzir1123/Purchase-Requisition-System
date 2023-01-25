@@ -1,0 +1,76 @@
+{% extends "../app/layout.html" %}
+
+{% block content %}
+<head>
+    {% load static %}
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ </head>
+
+<div>
+    <h1>Create PR</h1>
+    <form method="post" id="form" >
+    {% csrf_token %}
+        <label for="pr_id">PR ID:</label>
+        <input type="text" id="pr_id" name="pr_id"><br>
+
+        <label for="date_created">Date Created:</label>
+        <input type="date" id="date_created" name="date_created"><br>
+        
+        <label for="User_id">User Id:</label>
+        <input type="text" readonly id="submitted_by" name="submitted_by" value="{{ user_id }}"><br>
+          
+        <label for="status">Status:</label>
+        <input type="text" readonly id="status" name="approval_status" value="Pending"><br>
+        
+        <table id="pr_item_table">
+            <tr>
+            <th>Item Name</th>
+            <th>Item Quantity</th>
+            <th>Item Description</th>
+            <th>Action</th>
+            </tr>
+        </table>
+
+        <button onclick="addItem(event)" 
+        style="background-color: #2D92E2;"
+        class="btn-primary btn-md btn-block mx-auto" >Add Item</button>
+        <button type="submit" value="Submit">Create PR</button>
+    </form>
+</div>
+
+<script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+<script src="{% static 'app/scripts/respond.js' %}"></script>
+<script>
+    // Add a new PR item to the table
+    function addItem(event) {
+    console.log("Add Item Clicked");
+    event.preventDefault();
+      var table = document.getElementById("pr_item_table");
+      var row = table.insertRow(-1);
+      var itemNameCell = row.insertCell(0);
+      var itemQtyCell = row.insertCell(1);
+      var itemDescCell = row.insertCell(2);
+      var actionCell = row.insertCell(3);
+  
+      itemNameCell.innerHTML = '<input type="text" name="item_name[]">';
+      itemQtyCell.innerHTML = '<input type="number" name="item_qty[]">';
+      itemDescCell.innerHTML = '<input type="text" name="item_desc[]">';
+      actionCell.innerHTML = '<button onclick="deleteRow(this)">Delete</button>';
+    }
+  
+    // Delete a PR item from the table
+    function deleteRow(btn) {
+      var row = btn.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    } 
+  </script>
+
+  <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+  <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+  <script src="{% static 'app/scripts/respond.js' %}"></script>
+{% endblock %}
