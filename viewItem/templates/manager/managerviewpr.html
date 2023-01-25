@@ -1,0 +1,20 @@
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Submitted By</th>
+      <th>Approval Status</th>
+      <th>Marked By</th>
+      <th>Manager Remark</th>
+      <th>Date Created</th>
+    </tr>
+    {% for pr in pr_list %}
+    <tr>
+      <td>{{ pr.pr_id }}</td>
+      <td>{{ pr.submitted_by }}</td>
+      <td>{{ pr.approval_status }}</td>
+      <td>{{ pr.marked_by }}</td>
+      <td>{{ pr.manager_remark }}</td>
+      <td>{{ pr.date_created }}</td>
+    </tr>
+    {% endfor %}
+  </table>

@@ -32,8 +32,8 @@ class Employee(models.Model):
 
 class Manager(models.Model):
     manager_id = models.CharField(primary_key=True, max_length=15)
-    manager_name = models.CharField(max_length=40, null=True)
     manager_contact = models.CharField(max_length=15, null= True, blank = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):

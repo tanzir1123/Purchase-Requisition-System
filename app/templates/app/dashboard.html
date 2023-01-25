@@ -1,0 +1,55 @@
+{% extends "./layout.html" %} {% block content %}
+
+<head>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #04aa6d;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<div class="main">
+    <div class="headers">
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            {% if is_manager %}
+            <a href="{% url 'managerviewpr' %}">View PR</a>
+            <a href="">Contact</a>
+            <a href="">About</a>
+        </div>
+
+        {{ user.first_name }}
+        {% endif %}
+    </div>
+
+    <div class="body"></div>
+</div>
+
+{% endblock %}

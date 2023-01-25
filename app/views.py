@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
+from .models import Manager
 
 from django.contrib.auth.decorators import login_required
 
@@ -49,15 +50,24 @@ def about(request):
     )
 
 @login_required
-def menu(request):
-    check_employee = request.user.groups.filter(name='employee').exists()
-
+def dashboard(request):
+    
+    is_manager = request.user.groups.filter(name='Manager').exists()
+    
+    # if(is_vendor == True):
+    #     mydata = Salesman.objects.get(user=request.user).salesman_id
+    # if(is_employee == True):
+    #     mydata = Customer.objects.get(user=request.user).customer_id
+    if(is_manager == True):
+        mydata = Manager.objects.get(user=request.user).manager_id
+        print(mydata)
+    # if(is_finance_officer == True):
+    #     mydata = FinanceOfficer.objects.get(user=request.user).finance_officer_id  
+    
     context = {
-            'title':'Main Menu',
-            'is_employee': check_employee,
-             
-            'year':datetime.now().year,
+            'mydata': mydata,
+            'is_manager': is_manager
         }
     context['user'] = request.user
 
-    return render(request,'app/menu.html',context)
+    return render(request,'app/dashboard.html',context)
