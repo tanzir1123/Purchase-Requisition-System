@@ -55,3 +55,9 @@ def update_PR(request):
         return JsonResponse("Status saved", safe=False)
     else:
         return HttpResponseBadRequest("Invalid request method")
+
+@login_required
+def vendorviewpr(request):
+    pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
+    context = {'pr_list': pr_list}
+    return render(request, 'vendor/vendorviewpr.html', context)

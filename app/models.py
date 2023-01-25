@@ -50,6 +50,7 @@ class Vendor(models.Model):
     vendor_name = models.CharField(max_length=40, null=True)
     vendor_contact = models.CharField(max_length=15, null= True, blank = True)
     vendor_address = models.CharField(max_length=100, null= True, blank = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):
@@ -64,6 +65,7 @@ class Purchaser(models.Model):
     purchaser_id = models.CharField(primary_key=True, max_length=15)
     purchaser_name = models.CharField(max_length=40, null=True)
     purchaser_contact = models.CharField(max_length=15, null= True, blank = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):
@@ -78,6 +80,7 @@ class FinanceOfficer(models.Model):
     financeofficer_id = models.CharField(primary_key=True, max_length=15)
     financeofficer_name = models.CharField(max_length=40, null=True)
     financeofficer_contact = models.CharField(max_length=15, null= True, blank = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     
     #Saving with the prefix in the database.
     def save(self, *args, **kwargs):

@@ -48,6 +48,8 @@ urlpatterns = [
     # update 
     path('update_PR/', viewItemview.update_PR, name='update_PR'),
 
+    #vendor views
+    re_path(r'^vendorviewpr$', viewItemview.vendorviewpr, name='vendorviewpr'),
 
     # addItem views
     # re_path(r'^additemform$', additem_views.additemform, name='additem_form'),
