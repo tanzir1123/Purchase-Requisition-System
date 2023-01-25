@@ -6,6 +6,7 @@
       <th>Marked By</th>
       <th>Manager Remark</th>
       <th>Date Created</th>
+      <th>View</th>
     </tr>
     {% for pr in pr_list %}
     <tr>
@@ -15,6 +16,20 @@
       <td>{{ pr.marked_by }}</td>
       <td>{{ pr.manager_remark }}</td>
       <td>{{ pr.date_created }}</td>
+      <td><a href="{% url 'managerviewprdetails' pr.pr_id %}">View Details</a></td>
+      <!-- <td> <button class="view-button" data-pr_id="{{pr.pr_id}}" >View Details</button></td> -->
     </tr>
     {% endfor %}
   </table>
+
+  <!-- <script>
+    var buttons = document.getElementsByClassName("view-button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].onclick = function() {
+        var pr_id = this.getAttribute("data-pr_id");
+        window.location.href = '/PRdetails/' + pr_id;
+      }
+    }
+  </script>
+   -->
+  

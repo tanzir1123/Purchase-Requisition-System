@@ -38,7 +38,9 @@ urlpatterns = [
         name='logout'),
     re_path(r'^dashboard$', main_views.dashboard, name='dashboard'),
     re_path(r'^managerviewpr$', viewItemview.managerviewpr, name='managerviewpr'),
-    
+
+    path('prdetails/<str:pr_id>/', viewItemview.managerviewprdetails, name='managerviewprdetails'),
+
     re_path(r'^additemform$', additem_views.additemform, name='additem_form'),
     re_path(r'^additemconfirmation$', additem_views.additemconfirmation, name='additem_confirmation'),
 
