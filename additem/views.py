@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 # from app.models import Item
 from django.shortcuts import render, redirect
-from app.models import Employee
+from app.models import Employee, QuotationItem
 from app.models import PrItem, Vendor
 from .forms import PRForm, PR_ItemForm, QuotationForm, Quotation_ItemForm
 from django.contrib import messages
@@ -98,13 +98,13 @@ def create_quotation(request, pr_id):
 
            
             for i in range(int(request.POST.get('number_of_items'))):
-                item_obj = Quotation_ItemForm(
+                QuotationItem.objects.create(
                         q_item_name=q_item_name_list[i],
                         q_item_unit_price=q_item_unit_price_list[i],
                         q_item_qty=q_item_quantity_list[i],
                         quotation_id=q
                     )
-                item_obj.save()
+            
                 
                 print("Successfully created quotation")
         else:

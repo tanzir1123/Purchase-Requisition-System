@@ -185,7 +185,7 @@ class QuotationItem(models.Model):
 
     # Saving the Q_Item_Price
     def save(self, *args, **kwargs): 
-        self.q_item_price = self.q_item_unit_price * self.q_item_qty
+        self.q_item_price = int(self.q_item_unit_price) * int(self.q_item_qty)
         super().save(*args, **kwargs)
 
     def __str__(self):
