@@ -22,7 +22,6 @@
 
             {% elif is_vendor %} 
             <a href="{%url 'vendorviewpr' %}" >View OPEN PRs </a>
-            <a href="{% url 'create_quotation' %}">Create Quotation</a>
             <a href="{%url 'vendorviewqhistory' %}" > MY Quotation History </a>
             
             {% elif is_purchaser %}
@@ -33,6 +32,8 @@
             {% elif is_finance_officer %}
             <a href="{% url 'financeofficerviewpr' %}"> View PR </a>
             <a href="{% url 'financeofficerviewq' %}"> View Quotation Submissions </a>
+            <a href="{% url 'financeofficerviewpohistory' %}"> View MY Purchase Orders </a>
+            
             {% endif %}
         </div>
         

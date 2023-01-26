@@ -16,10 +16,10 @@
     <form method="post" id="form" >
     {% csrf_token %}
         <label for="quotation_id">Quotation ID:</label>
-        <input type="text" id="pr_id" name="pr_id" ><br>
+        <input type="text" id="quotation_id" name="quotation_id" ><br>
 
         <label for="date_of_expiry">Date of Expiry:</label>
-        <input type="date" id="date_created" name="date_created"><br>
+        <input type="date" id="date_of_expiry" name="date_of_expiry"><br>
         
         <label for="vendor_id">Vendor Id:</label>
         <input type="text" readonly id="vendor_id" name="vendor_id" value="{{ user_id }}"><br>
@@ -27,9 +27,20 @@
         <label for="status">Status:</label>
         <input type="text" readonly id="status" name="approval_status" value="Pending"><br>
         
-        {% comment %}pr id? q_payment_terms? total_price?  checked_by?{% endcomment %}
+        <label for="pr_id">Pr Id:</label>
+        <input type="text" readonly id="pr_id" name="pr_id" value="{{ pr_id }}"><br>
+
+        <label for="q_payment_terms">Payment terms:</label>
+        <input type="text" id="q_payment_terms" name="q_payment_terms" ><br>
+
+
+        {% comment %} total_price?{% endcomment %}
 
         <div class="items-container"></div>
+        
+        <label for="price">Total Price</label>
+        <input type="number" name="total_price" id="price" class="form-control total_price" readonly>
+
 
         <label for="number_of_items"style=" font-family: 'Inknut Antiqua';
           font-style: normal;font-weight: 700;">Add Item</label>
@@ -46,7 +57,6 @@
 <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
 <script src="{% static 'app/scripts/respond.js' %}"></script>
 <script>
-
   $('.add-field-input').on('change', function() {
     var number_of_items = $(this).val();
     $('.items-container').empty();
@@ -58,20 +68,26 @@
                     <input type="text" name="q_item_name" class="form-control item-name">
                 </td>
                 <td>
-                    <label>Item Unit price</label>
-                    <input type="number" name="q_item_unit_price" class="form-control item-quantity">
-                </td>
-                <td>
                     <label>Item Quantity</label>
                     <input type="number" name="q_item_qty" class="form-control item-quantity">
-                </td>
+                </td>a
                 <td>
-                  <label>Item Price</label>
-                  <input type="number" name="q_item_price" class="form-control item-description">
-              </td>
+                    <label>Item Unit Price</label>
+                    <input type="number" name="q_item_unit_price" class="form-control item-price">
+                </td>
             </tr>
         `);
     }
+});
+
+$(document).on('input', '.item-price', function() {
+    let totalPrice = 0;
+    $('.item-field').each(function() {
+        const itemPrice = parseFloat($(this).find('.item-price').val());
+        var itemQuantity = parseFloat($(this).find('.item-quantity').val());
+        totalPrice += itemPrice * itemQuantity;
+    });
+    $('.total_price').val(totalPrice);
 });
 
   </script>

@@ -1,3 +1,5 @@
+
+<div>
 <h1>PR Details</h1>
 
 <table>
@@ -34,5 +36,8 @@
     </tr>
     {% endfor %}
   </table>
-
-
+  <div>
+    <button type="button" class="btn btn-primary" 
+    onclick="window.location='{% url 'create_quotation' pr.pr_id %}';">Create Quotation</button>
+  </div>
+</div>

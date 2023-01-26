@@ -200,7 +200,7 @@ class Purchaseorder(models.Model):
     quotation_id = models.ForeignKey(Quotation, on_delete=models.CASCADE)
     total_price = models.FloatField(null=True, blank=True)
     date_created = models.DateField()
-    q_payment_terms = models.CharField(max_length=100, null=True, blank=True)
+    po_terms = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return str(self.po_id)

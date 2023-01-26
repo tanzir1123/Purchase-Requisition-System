@@ -40,7 +40,7 @@ urlpatterns = [
 
     # addItem views
     path('createpr/', additem_views.create_pr, name='create_pr'),
-    path('create_quotation/', additem_views.create_quotation, name='create_quotation'),
+    path('create_quotation/<str:pr_id>/', additem_views.create_quotation, name='create_quotation'),
     
 
 
@@ -79,5 +79,7 @@ urlpatterns = [
     path('financeofficerviewprdetails/<str:pr_id>/', viewItemview.financeofficerviewprdetails, name='financeofficerviewprdetails'),
     re_path(r'^financeofficerviewq$', viewItemview.financeofficerviewq, name='financeofficerviewq'),
     path('financeofficerviewqdetails/<str:quotation_id>/', viewItemview.financeofficerviewqdetails, name='financeofficerviewqdetails'),
+    re_path(r'^financeofficerviewpohistory$', viewItemview.financeofficerviewpohistory, name='financeofficerviewpohistory'),
+    path('financeofficerviewpodetails/<po_id>/', viewItemview.financeofficerviewpodetails, name='financeofficerviewpodetails'),
     
 ]

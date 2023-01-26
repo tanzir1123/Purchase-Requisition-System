@@ -190,3 +190,16 @@ def financeofficerviewqdetails(request, quotation_id):
     q_items = QuotationItem.objects.filter(quotation_id=quotation_id)
     context = {'q' : q, 'q_items': q_items}
     return render(request, 'financeofficer/financeofficerviewqdetails.html',context)
+
+@login_required
+def financeofficerviewpohistory(request):
+    user_id = Financeofficer.objects.get(user=request.user).financeofficer_id
+    po_list = Purchaseorder.objects.filter(financeOfficerId=user_id).values()
+    context = {'po_list': po_list}
+    return render(request, 'financeofficer/financeofficerviewpohistory.html', context)
+
+def financeofficerviewpodetails(request, po_id):
+    po = Purchaseorder.objects.get(po_id=po_id)
+    po_items = Purchaseorder.objects.filter(po_id=po_id)
+    context = {'po' : po, 'po_items': po_items}
+    return render(request, 'financeofficer/financeofficerviewpodetails.html', context)

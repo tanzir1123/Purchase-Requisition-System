@@ -27,20 +27,20 @@
   </tr>
 </table>
 <table>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Quantity</th>
-      <th>Description</th>
-    </tr>
-    {% for item in pr_items %}
-    <tr>
-      <td>{{ item.pr_item_id }}</td>
-      <td>{{ item.pr_item_name }}</td>
-      <td>{{ item.pr_item_qty }}</td>
-      <td>{{ item.pr_item_description }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Description</th>
+  </tr>
+  {% for item in pr_items %}
+  <tr>
+    <td>{{ item.pr_item_id }}</td>
+    <td>{{ item.pr_item_name }}</td>
+    <td>{{ item.pr_item_qty }}</td>
+    <td>{{ item.pr_item_description }}</td>
+  </tr>
+  {% endfor %}
+</table>
 
 

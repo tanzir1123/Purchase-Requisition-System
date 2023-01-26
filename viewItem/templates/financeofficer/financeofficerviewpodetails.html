@@ -1,0 +1,62 @@
+{% extends "../app/layout.html" %}
+
+{% block content %}
+<head>
+  {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+   <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+   <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<h1>Quotation Details (Viewing as a Finance Officer) </h1>
+
+<table>
+  <tr>
+    <th>PO_Id</th>
+    <td>{{ po.po_id }}</td>
+  </tr>
+  <tr>
+    <th>PR_Id</th>
+    <td>{{ po.pr_id }}</td>
+  </tr>
+  <tr>
+    <th>QuotationId</th>
+    <td>{{ po.quotation_id  }}</td>
+  </tr>
+  <tr>
+    <th>Total Price</th>
+    <td>{{ po.total_price }}</td>
+  </tr>
+  <tr>
+    <th>Date Created</th>
+    <td>{{ po.date_created }}</td>
+  </tr>
+  <tr>
+    <th>PO Terms</th>
+    <td>{{ po.po_terms }}</td>
+  </tr>
+</table>
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Price</th>
+
+    </tr>
+    {% for item in po_items %}
+    <tr>
+      <td>{{ item.po_item_id }}</td>
+      <td>{{ item.po_item_name }}</td>
+      <td>{{ item.po_unit_price }}</td>
+      <td>{{ item.po_item_qty }}</td>
+      <td>{{ item.po_item_price}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{%endblock %}
