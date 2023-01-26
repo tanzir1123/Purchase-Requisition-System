@@ -216,7 +216,7 @@ class POItem(models.Model):
 
     # Saving the PO_Item_Price
     def save(self, *args, **kwargs):
-        self.q_item_price = self.po_unit_price * self.po_item_qty
+        self.q_item_price = int(self.po_unit_price) * int(self.po_item_qty)
         super().save(*args, **kwargs)
 
     def __str__(self):

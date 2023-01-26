@@ -1,6 +1,64 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('..\fonts\Montserrat-Black.ttf') format('truetype');
+}
+
+.navbar {
+    background-color: #C7CCDB;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Montserrat', 'Helvetica';
+    font-size: 18px;
+    height: 100px;
+    padding-top: 25px;
+    margin: auto;
+    border-color: #C7CCDB;
+}
+
+.navbar a {
+    color: #2A324B !important;
+}
+
+.navbar a:hover {
+    color: white !important;
+}
+
+.navbar-header, .navbar-brand {
+    /* padding-left: 50px; */
+    padding-right: 25px;
+    font-size: 25px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #439A86;
+}
+
+.navbar li + li {
+    border-left: 2px solid #2A324B;
+    line-height: 80%;
+}
+
+.jumbotron {
+    background-color: #E1E5EE;
+    width: 100%;
+}
+
 body {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 20px;
+    color: #2A324B;
+    font-family: 'Montserrat', 'Helvetica';
+    font-size: 16px;
+    background-color: #F6F6F6;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Helvetica';
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 3%;
+    text-decoration: underline solid #2A324B 3px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -14,11 +72,27 @@ input,
 select,
 textarea {
     max-width: 280px;
+    border-radius: 5%;
+    border: 2px solid #C7CCDB;
+    background-color: #E1E5EE;
+}
+
+button {
+    display: inline-block;
+    background-color: #439A86;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5%;
+}
+
+footer {
+    font-size: 10px;
+    text-align: center;
 }
 
 /* styles for validation helpers */
 .field-validation-error {
-    color: #b94a48;
+    color: #BB3541;
 }
 
 .field-validation-valid {
@@ -26,7 +100,7 @@ textarea {
 }
 
 input.input-validation-error {
-    border: 1px solid #b94a48;
+    border: 1px solid #BB3541;
 }
 
 input[type="checkbox"].input-validation-error {
@@ -34,7 +108,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validation-summary-errors {
-    color: #b94a48;
+    color: #BB3541;
 }
 
 .validation-summary-valid {

@@ -3,7 +3,7 @@
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/dashboard.css' %}" />
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
@@ -31,7 +31,7 @@
             
             {% elif is_finance_officer %}
             <a href="{% url 'financeofficerviewpr' %}"> View PR </a>
-            <a href="{% url 'financeofficerviewq' %}"> View Quotation Submissions </a>
+            <a href="{% url 'financeofficerviewq' %}"> View Approved Quotations </a>
             <a href="{% url 'financeofficerviewpohistory' %}"> View MY Purchase Orders </a>
             
             {% endif %}

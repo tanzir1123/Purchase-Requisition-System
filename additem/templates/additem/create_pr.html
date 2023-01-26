@@ -5,6 +5,7 @@
     {% load static %}
      <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
      <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/formview.css' %}" />
      <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,16 +16,16 @@
     <form method="post" id="form" >
     {% csrf_token %}
         <label for="pr_id">PR ID:</label>
-        <input type="text" id="pr_id" name="pr_id"><br>
+        <input type="text" id="pr_id" class="form-control " name="pr_id"><br>
 
         <label for="date_created">Date Created:</label>
-        <input type="date" id="date_created" name="date_created"><br>
+        <input type="date" id="date_created" class="form-control " name="date_created"><br>
         
         <label for="User_id">User Id:</label>
-        <input type="text" readonly id="submitted_by" name="submitted_by" value="{{ user_id }}"><br>
+        <input type="text" readonly id="submitted_by" class="form-control " name="submitted_by" value="{{ user_id }}"><br>
           
         <label for="status">Status:</label>
-        <input type="text" readonly id="status" name="approval_status" value="Pending"><br>
+        <input type="text" readonly id="status" class="form-control " name="approval_status" value="Pending"><br>
 
         <div class="items-container"></div>
 
@@ -33,10 +34,10 @@
           <input type="number" class="form-control add-field-input"
                   name="number_of_items"
                   id="numberOfFields" value="" 
-                  style="background: rgba(123, 242, 254, 0.7);
-          border-radius: 50px; border:none;">
-
-        <button type="submit" value="Submit">Create PR</button>
+                 >
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <button type="submit" value="Submit" class="btn btn-primary" style="margin-top:20px">Create PR</button>
+        </div>
     </form>
 </div>
 

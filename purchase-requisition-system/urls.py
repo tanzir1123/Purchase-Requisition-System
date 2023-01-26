@@ -41,7 +41,7 @@ urlpatterns = [
     # addItem views
     path('createpr/', additem_views.create_pr, name='create_pr'),
     path('create_quotation/<str:pr_id>/', additem_views.create_quotation, name='create_quotation'),
-    
+     path('create_po/<str:quotation_id>/', additem_views.create_po, name='create_po'),
 
 
     # viewsItem views

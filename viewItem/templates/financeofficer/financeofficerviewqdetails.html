@@ -1,39 +1,67 @@
-<h1>Quotation Details (Viewing as a Finance Officer) </h1>
+{% extends "../app/layout.html" %} {% block content %}
+<head>
+  {% load static %}
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'app/content/bootstrap.min.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'app/content/site.css' %}"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'app/content/detailsview.css' %}"
+  />
+  <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+</head>
+<div>
+  <h1>Quotation Details (Viewing as a Finance Officer)</h1>
 
-<table>
-  <tr>
-    <th>Quotation ID</th>
-    <td>{{ q.quotation_id }}</td>
-  </tr>
-  <tr>
-    <th>Pr ID</th>
-    <td>{{ q.pr_id }}</td>
-  </tr>
-  <tr>
-    <th>Approval Status</th>
-    <td>{{ q.approval_status }}</td>
-  </tr>
-  <tr>
-    <th>Checked By</th>
-    <td>{{ q.checked_by }}</td>
-  </tr>
-  <tr>
-    <th>Total Price</th>
-    <td>{{ q.total_price }}</td>
-  </tr>
-  <tr>
-    <th>Date of Expiry</th>
-    <td>{{ q.date_date_of_expiry }}</td>
-  </tr>
-  <tr>
-    <th>Payment Terms: </th>
-    <td>{{ q.q_payment_terms}} </td>
-</table>
-<table>
+  <table>
+    <tr>
+      <th>Quotation ID</th>
+      <td>{{ q.quotation_id }}</td>
+    </tr>
+    <tr>
+      <th>Pr ID</th>
+      <td>{{ q.pr_id }}</td>
+    </tr>
+    <tr>
+      <th>Approval Status</th>
+      <td>{{ q.approval_status }}</td>
+    </tr>
+    <tr>
+      <th>Checked By</th>
+      <td>{{ q.checked_by }}</td>
+    </tr>
+    <tr>
+      <th>Total Price</th>
+      <td>{{ q.total_price }}</td>
+    </tr>
+    <tr>
+      <th>Date of Expiry</th>
+      <td>{{ q.date_date_of_expiry }}</td>
+    </tr>
+    <tr>
+      <th>Payment Terms:</th>
+      <td>{{ q.q_payment_terms}}</td>
+    </tr>
+  </table>
+
+  <table>
     <tr>
       <th>Item Id</th>
       <th>Name</th>
-      <th>Unit Price </th>
+      <th>Unit Price</th>
       <th>Quantity</th>
       <th>Price</th>
     </tr>
@@ -43,9 +71,18 @@
       <td>{{ item.q_item_name }}</td>
       <td>{{ item.q_item_unit_price}}</td>
       <td>{{ item.q_item_qty }}</td>
-      <td>{{ item.q_item_price }} </td>
+      <td>{{ item.q_item_price }}</td>
     </tr>
     {% endfor %}
   </table>
-
-
+  <div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="window.location='{% url 'create_po' q.quotation_id %}';"
+    >
+      Create Purchase Order
+    </button>
+  </div>
+</div>
+{% endblock %}

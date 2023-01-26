@@ -3,41 +3,11 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 # from app.models import Item
 from django.shortcuts import render, redirect
-from app.models import Employee, QuotationItem
-from app.models import PrItem, Vendor
-from .forms import PRForm, PR_ItemForm, QuotationForm, Quotation_ItemForm
+from app.models import Employee, QuotationItem, POItem, Quotation
+from app.models import PrItem, Vendor, Financeofficer
+from .forms import POForm, PRForm, PR_ItemForm, QuotationForm, Quotation_ItemForm
 from django.contrib import messages
 # Create your views here.
-
-
-# def additemform(request):
-#     context = {
-#         'title': 'Add Item Form',
-#         'year': datetime.now().year,
-#     }
-#     context['user'] = request.user
-
-#     return render(request, 'additem/additemform.html', context)
-
-
-# def additemconfirmation(request):
-#     print(request)
-
-#     newitem_id = request.POST['item_id']
-#     newitem_name = request.POST['item_name']
-#     newitem_description = request.POST['item_description']
-
-#     newitem = Item(item_id=newitem_id, item_name=newitem_name,
-#                    item_description=newitem_description)
-#     newitem.save()
-
-#     context = {
-
-#         'item_id': newitem_id,
-#         'item_name': newitem_name,
-#         'item_description': newitem_description,
-#     }
-#     return render(request, 'additem/additemconfirmation.html', context)
 
 
 def create_pr(request):
@@ -114,3 +84,45 @@ def create_quotation(request, pr_id):
     
    
     return render(request, 'addItem/create_quotation.html', context)
+
+
+def create_po(request, quotation_id):
+    user_id = Financeofficer.objects.get(user=request.user).financeofficer_id
+    pr_id  = Quotation.objects.get(quotation_id=quotation_id).pr_id
+    
+    context = {'user_id': user_id, 'quotation_id': quotation_id, 'pr_id': pr_id}
+    
+    if request.method == 'POST':
+        form = POForm(request.POST)
+
+        if form.is_valid():
+            messages.success(request, 'Data was successfully entered in the database.')
+            po = form.save()
+        
+            po_item_name_list = request.POST.getlist('po_item_name')
+            po_item_price_list = request.POST.getlist('po_unit_price')
+            po_item_quantity_list = request.POST.getlist('po_item_qty')
+    
+            print(po_item_name_list)
+
+            print(po)
+            print(request.POST.get('number_of_items'))
+
+           
+            for i in range(int(request.POST.get('number_of_items'))):
+                POItem.objects.create(
+                        po_item_name=po_item_name_list[i],
+                        po_unit_price=po_item_price_list[i],
+                        po_item_qty=po_item_quantity_list[i],
+                        po_id=po
+                    )
+            
+                
+                print("Successfully PO created!!! ")
+        else:
+            print(form.errors)
+            messages.error(request, 'Data was not entered in the database')
+            return render(request, 'addItem/create_po.html', {'form': form})
+    
+   
+    return render(request, 'addItem/create_po.html', context)

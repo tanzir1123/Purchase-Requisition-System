@@ -1,0 +1,100 @@
+{% extends "../app/layout.html" %}
+
+{% block content %}
+<head>
+    {% load static %}
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/formview.css' %}" />
+     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ </head>
+
+
+<div>
+    <h1>Create Purchase Order </h1>
+    <form method="post" id="form" >
+    {% csrf_token %}
+        <label for="po_id">PO_ID:</label>
+        <input type="text" id="po_id" class="form-control" name="po_id" ><br>
+
+        <label for="financeOfficerId">Finance officer Id:</label>
+        <input type="text" readonly id="financeOfficerId" class="form-control " name="financeOfficerId" value="{{ user_id }}"><br>
+          
+        <label for="pr_id">Pr Id:</label>
+        <input type="text" readonly id="pr_id" class="form-control " name="pr_id" value="{{ pr_id.pr_id }}"><br>
+
+        
+        <label for="quotation_id">Quotation Id:</label>
+        <input type="text" readonly id="quotation_id" class="form-control " name="quotation_id" value="{{ quotation_id }}"><br>
+
+        <label for="date_created">Date-Created:</label>
+        <input type="date" id="date_created" class="form-control" name="date_created"><br>
+        
+
+        <label for="po_terms">PO terms:</label>
+        <input type="text" id="po_terms" class="form-control " name="po_terms" ><br>
+
+
+{% comment %} --------------------- {% endcomment %}
+
+<div class="items-container"></div>
+        
+<label for="price">Total Price</label>
+<input type="number" name="total_price" id="price" class="form-control total_price" readonly>
+
+
+<label for="number_of_items"style=" font-family: 'Inknut Antiqua';
+  font-style: normal;font-weight: 700;">Add Item</label>
+  <input type="number" class="form-control add-field-input"
+          name="number_of_items"
+          id="number_of_items" value="" 
+          >
+
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <button type="submit" value="Submit" class="btn btn-primary" style="margin-top:20px">Create Purchase Order</button>
+        </div>
+</form>
+</div>
+
+<script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+<script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+<script src="{% static 'app/scripts/respond.js' %}"></script>
+<script>
+    $('.add-field-input').on('change', function() {
+        var number_of_items = $(this).val();
+        $('.items-container').empty();
+        for(var i = 0; i < number_of_items; i++) {
+            $('.items-container').append(`
+                <tr class="item-field">
+                    <td>
+                        <label>Item Name</label>
+                        <input type="text" name="po_item_name" class="form-control item-name">
+                    </td>
+                    <td>
+                        <label>Item Quantity</label>
+                        <input type="number" name="po_item_qty" class="form-control item-quantity">
+                    </td>a
+                    <td>
+                        <label>Item Unit Price</label>
+                        <input type="number" name="po_unit_price" class="form-control item-price">
+                    </td>
+                </tr>
+            `);
+        }
+    });
+
+    $(document).on('input', '.item-price', function() {
+        let totalPrice = 0;
+        $('.item-field').each(function() {
+            const itemUnitPrice = parseFloat($(this).find('.item-price').val());
+            var itemQuantity = parseFloat($(this).find('.item-quantity').val());
+            totalPrice += itemUnitPrice * itemQuantity;
+        });
+        $('.total_price').val(totalPrice);
+    });
+    
+    </script>
+
+ {%endblock %}

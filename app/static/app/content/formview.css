@@ -1,0 +1,33 @@
+#form {
+    width: 100%;
+    margin: 0 auto;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-right: 25%;
+    justify-content: flex-end;
+}
+
+input {
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+table {
+    margin-top: 2.5%;
+}
+
+.items-container {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+.items-container label {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

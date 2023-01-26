@@ -1,5 +1,5 @@
 from django import forms
-from app.models import PR, PrItem, Quotation, QuotationItem
+from app.models import PR, PrItem, Quotation, QuotationItem, Purchaseorder
 
 class PRForm(forms.ModelForm):
     class Meta:
@@ -21,3 +21,8 @@ class Quotation_ItemForm(forms.ModelForm):
     class Meta:
         model = QuotationItem
         fields = ['q_item_id', 'quotation_id', 'q_item_name', 'q_item_unit_price', 'q_item_qty', 'q_item_price']
+
+class POForm(forms.ModelForm):
+    class Meta:
+        model = Purchaseorder
+        fields = ['po_id', 'financeOfficerId', 'pr_id', 'quotation_id', 'total_price', 'date_created',  'po_terms']
