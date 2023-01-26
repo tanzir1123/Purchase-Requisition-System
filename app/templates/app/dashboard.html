@@ -50,6 +50,7 @@
 
             {% elif is_vendor %} 
             <a href="{%url 'vendorviewpr' %}" >View OPEN PRs </a>
+            <a href="{%url 'vendorviewqhistory' %}" > MY Quotation History </a>
             
             {% elif is_purchaser %}
             <a href="{% url 'purchaserviewpr' %}"> View PR </a>

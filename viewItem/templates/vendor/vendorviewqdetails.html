@@ -1,0 +1,51 @@
+<h1>Quotation Details (Viewing as a Vendor) </h1>
+
+<table>
+  <tr>
+    <th>Quotation ID</th>
+    <td>{{ q.quotation_id }}</td>
+  </tr>
+  <tr>
+    <th>Pr ID</th>
+    <td>{{ q.pr_id }}</td>
+  </tr>
+  <tr>
+    <th>Approval Status</th>
+    <td>{{ q.approval_status }}</td>
+  </tr>
+  <tr>
+    <th>Checked By</th>
+    <td>{{ q.checked_by }}</td>
+  </tr>
+  <tr>
+    <th>Total Price</th>
+    <td>{{ q.total_price }}</td>
+  </tr>
+  <tr>
+    <th>Date of Expiry</th>
+    <td>{{ q.date_date_of_expiry }}</td>
+  </tr>
+  <tr>
+    <th>Payment Terms: </th>
+    <td>{{ q.q_payment_terms}} </td>
+</table>
+<table>
+    <tr>
+      <th>Item Id</th>
+      <th>Name</th>
+      <th>Unit Price </th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    {% for item in q_items %}
+    <tr>
+      <td>{{ item.quotation_id }}</td>
+      <td>{{ item.q_item_name }}</td>
+      <td>{{ item.q_item_unit_price}}</td>
+      <td>{{ item.q_item_qty }}</td>
+      <td>{{ item.q_item_price }} </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
