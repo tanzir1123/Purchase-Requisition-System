@@ -67,3 +67,16 @@ def vendorviewprdetails(request, pr_id):
     pr_items = PrItem.objects.filter(pr_id=pr_id)
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'vendor/vendorviewprdetails.html', context)
+
+@login_required
+def employeeviewprhistory(request):
+    user_id = Employee.objects.get(user=request.user).employee_id
+    pr_list = PR.objects.filter(submitted_by=user_id).values()
+    context = {'pr_list': pr_list}
+    return render(request, 'employee/employeeviewprhistory.html', context)
+
+def employeeviewprdetails(request, pr_id):
+    pr = PR.objects.get(pr_id=pr_id)
+    pr_items = PrItem.objects.filter(pr_id=pr_id)
+    context = {'pr': pr, 'pr_items': pr_items}
+    return render(request, 'employee/employeeviewprdetails.html', context)

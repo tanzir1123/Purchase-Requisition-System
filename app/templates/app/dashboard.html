@@ -46,8 +46,8 @@
             
             {% elif is_employee %}
             <a href="{% url 'create_pr' %}">Create PR</a>
-            <a href="">My PR History</a>
-
+            <a href="{% url 'employeeviewprhistory' %}">My PR History</a>
+            
             {% elif is_vendor %} 
             <a href="{%url 'vendorviewpr' %}" >View OPEN PRs </a>
             

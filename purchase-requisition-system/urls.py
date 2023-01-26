@@ -55,6 +55,9 @@ urlpatterns = [
     # addItem views
     # re_path(r'^additemform$', additem_views.additemform, name='additem_form'),
     # re_path(r'^additemconfirmation$', additem_views.additemconfirmation, name='additem_confirmation'),
-    path('createpr/', additem_views.create_pr, name='create_pr')
+    path('createpr/', additem_views.create_pr, name='create_pr'),
+    re_path(r'^employeeviewprhistory$', viewItemview.employeeviewprhistory, name='employeeviewprhistory'),
+    path('employeeviewprdetails/<str:pr_id>/', viewItemview.employeeviewprdetails, name='employeeviewprdetails'),
+    
     # re_path(r'^add_pr_item$', additem_views.add_pr_item, name='add_pr_item')
 ]
