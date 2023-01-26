@@ -1,0 +1,46 @@
+<h1>PR Details (Viewing as a Finance Officer) </h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <td>{{ pr.pr_id }}</td>
+  </tr>
+  <tr>
+    <th>Submitted By</th>
+    <td>{{ pr.submitted_by }}</td>
+  </tr>
+  <tr>
+    <th>Approval Status</th>
+    <td>{{ pr.approval_status }}</td>
+  </tr>
+  <tr>
+    <th>Marked By</th>
+    <td>{{ pr.marked_by }}</td>
+  </tr>
+  <tr>
+    <th>Manager Remark</th>
+    <td>{{ pr.manager_remark }}</td>
+  </tr>
+  <tr>
+    <th>Date Created</th>
+    <td>{{ pr.date_created }}</td>
+  </tr>
+</table>
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Description</th>
+    </tr>
+    {% for item in pr_items %}
+    <tr>
+      <td>{{ item.pr_item_id }}</td>
+      <td>{{ item.pr_item_name }}</td>
+      <td>{{ item.pr_item_qty }}</td>
+      <td>{{ item.pr_item_description }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+

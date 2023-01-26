@@ -24,13 +24,13 @@ admin.site.register(Vendor)
 
 admin.site.register(Purchaser)
 
-# class FinanceOfficerAdmin(admin.ModelAdmin):
+# class FinanceofficerAdmin(admin.ModelAdmin):
 #     list_display = ("financeofficer_id", "financeofficer_name")
 
-admin.site.register(FinanceOfficer)
+admin.site.register(Financeofficer)
 admin.site.register(PR)
 admin.site.register(PrItem)
 admin.site.register(Quotation)
 admin.site.register(QuotationItem)
-admin.site.register(PurchaseOrder)
+admin.site.register(Purchaseorder)
 admin.site.register(POItem)
