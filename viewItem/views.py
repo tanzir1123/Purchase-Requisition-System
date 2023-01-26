@@ -139,11 +139,12 @@ def purchaserapproveq(request):
     context = {'q_list': q_list}
     return render(request, 'purchaser/purchaserapproveq.html', context)
 
-def purchaserviewqdetails(request, quotation_id):
+def purchaserapproveqdetails(request, quotation_id):
     q = Quotation.objects.get(quotation_id=quotation_id)
     q_items = QuotationItem.objects.filter(quotation_id=quotation_id)
-
-
+    context = {'q' : q, 'q_items': q_items}
+    return render(request, 'purchaser/purchaserapproveqdetails.html', context)
+    
 
 @login_required
 def financeofficerviewpr(request):

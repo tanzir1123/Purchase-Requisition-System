@@ -68,6 +68,8 @@ urlpatterns = [
     path('purchaserviewprdetails/<str:pr_id>/', viewItemview.purchaserviewprdetails, name='purchaserviewprdetails'),
     re_path(r'^purchaserviewq$', viewItemview.purchaserviewq, name='purchaserviewq'),
     path('purchaserviewqdetails/<str:quotation_id>/', viewItemview.purchaserviewqdetails, name='purchaserviewqdetails'),
+    path('purchaserapproveq', viewItemview.purchaserapproveq, name='purchaserapproveq'),
+    path('purchaserapproveqdetails/<quotation_id>', viewItemview.purchaserapproveqdetails, name = 'purchaserapproveqdetails'),
 
 
     #financeofficer URLs

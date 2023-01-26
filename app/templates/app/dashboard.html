@@ -27,6 +27,7 @@
             {% elif is_purchaser %}
             <a href="{% url 'purchaserviewpr' %}"> View PR </a>
             <a href="{% url 'purchaserviewq' %}"> View Quotation Submissions </a>
+            <a href="{% url 'purchaserapproveq' %}"> Review Quotation </a>
             
             {% elif is_finance_officer %}
             <a href="{% url 'financeofficerviewpr' %}"> View PR </a>
