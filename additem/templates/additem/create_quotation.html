@@ -5,38 +5,40 @@
     {% load static %}
      <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
      <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/form.css' %}" />
      <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  </head>
 
 <div>
-    <h1>Create PR</h1>
+    <h1>Create Quotation </h1>
     <form method="post" id="form" >
     {% csrf_token %}
-        <label for="pr_id">PR ID:</label>
-        <input type="text" id="pr_id" name="pr_id"><br>
+        <label for="quotation_id">Quotation ID:</label>
+        <input type="text" id="pr_id" name="pr_id" ><br>
 
-        <label for="date_created">Date Created:</label>
+        <label for="date_of_expiry">Date of Expiry:</label>
         <input type="date" id="date_created" name="date_created"><br>
         
-        <label for="User_id">User Id:</label>
-        <input type="text" readonly id="submitted_by" name="submitted_by" value="{{ user_id }}"><br>
+        <label for="vendor_id">Vendor Id:</label>
+        <input type="text" readonly id="vendor_id" name="vendor_id" value="{{ user_id }}"><br>
           
         <label for="status">Status:</label>
         <input type="text" readonly id="status" name="approval_status" value="Pending"><br>
+        
+        {% comment %}pr id? q_payment_terms? total_price?  checked_by?{% endcomment %}
 
         <div class="items-container"></div>
 
-        <label for="numberOfFields"style=" font-family: 'Inknut Antiqua';
+        <label for="number_of_items"style=" font-family: 'Inknut Antiqua';
           font-style: normal;font-weight: 700;">Add Item</label>
           <input type="number" class="form-control add-field-input"
                   name="number_of_items"
-                  id="numberOfFields" value="" 
-                  style="background: rgba(123, 242, 254, 0.7);
-          border-radius: 50px; border:none;">
+                  id="number_of_items" value="" 
+                  >
 
-        <button type="submit" value="Submit">Create PR</button>
+        <button type="submit" value="Submit">Create Quotation</button>
     </form>
 </div>
 
@@ -46,31 +48,35 @@
 <script>
 
   $('.add-field-input').on('change', function() {
-    var numberOfFields = $(this).val();
+    var number_of_items = $(this).val();
     $('.items-container').empty();
-    for(var i = 0; i < numberOfFields; i++) {
+    for(var i = 0; i < number_of_items; i++) {
         $('.items-container').append(`
             <tr class="item-field">
                 <td>
                     <label>Item Name</label>
-                    <input type="text" name="pr_item_name" class="form-control item-name">
+                    <input type="text" name="q_item_name" class="form-control item-name">
+                </td>
+                <td>
+                    <label>Item Unit price</label>
+                    <input type="number" name="q_item_unit_price" class="form-control item-quantity">
                 </td>
                 <td>
                     <label>Item Quantity</label>
-                    <input type="number" name="pr_item_qty" class="form-control item-quantity">
+                    <input type="number" name="q_item_qty" class="form-control item-quantity">
                 </td>
                 <td>
-                  <label>Item Description</label>
-                  <input type="text" name="pr_item_description" class="form-control item-description">
+                  <label>Item Price</label>
+                  <input type="number" name="q_item_price" class="form-control item-description">
               </td>
             </tr>
         `);
     }
 });
+
   </script>
 
   <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
   <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
   <script src="{% static 'app/scripts/respond.js' %}"></script>
-
 {% endblock %}

@@ -145,6 +145,27 @@ def purchaserapproveqdetails(request, quotation_id):
     context = {'q' : q, 'q_items': q_items}
     return render(request, 'purchaser/purchaserapproveqdetails.html', context)
     
+@csrf_exempt
+def update_quotation(request):
+    if request.method == 'POST':
+        quotation_id = request.POST.get('quotation_id')
+        status_type = request.POST.get('status_type')
+        remark = request.POST.get('remark')
+        purchaser_id = Purchaser.objects.get(user=request.user).purchaser_id
+
+        print( status_type + " " + remark + '\n\n\n\n')
+
+        if status_type == 'Approved':
+            Quotation.objects.filter(quotation_id=quotation_id).update(approval_status=status_type)
+            Quotation.objects.filter(quotation_id=quotation_id).update(purchaser_remark=remark)
+            Quotation.objects.filter(quotation_id=quotation_id).update(checked_by=purchaser_id)
+        elif status_type == 'Rejected':
+            Quotation.objects.filter(quotation_id=quotation_id).update(approval_status=status_type)
+            Quotation.objects.filter(quotation_id=quotation_id).update(purchaser_remark=remark)
+            Quotation.objects.filter(quotation_id=quotation_id).update(checked_by=purchaser_id)
+        return JsonResponse("Status saved", safe=False)
+    else:
+        return HttpResponseBadRequest("Invalid request method")
 
 @login_required
 def financeofficerviewpr(request):

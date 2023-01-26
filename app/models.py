@@ -160,6 +160,8 @@ class Quotation(models.Model):
     checked_by = models.ForeignKey(
         Purchaser, default=None, on_delete=models.SET_NULL, null=True, blank=True)
     total_price = models.FloatField(default=None, null=True)
+    purchaser_remark = models.CharField(
+        max_length=200, default=None, null=True, blank=True)
     date_of_expiry = models.DateField()
     q_payment_terms = models.CharField(
         max_length=100, default=None, null=True, blank=True)

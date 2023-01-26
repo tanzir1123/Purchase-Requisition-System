@@ -1,3 +1,14 @@
+{% extends "../app/layout.html" %}
+
+{% block content %}
+<head>
+  {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+   <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+   <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <div>
 
@@ -24,6 +35,7 @@
     {% endfor %}
   </table>
 </div>
+{% endblock %}
 
   <!-- <script>
     var buttons = document.getElementsByClassName("view-button");
@@ -35,4 +47,3 @@
     }
   </script>
    -->
-  

@@ -2,11 +2,13 @@
 
 {% block content %}
 <head>
-    {% load static %}
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    </head>
+  {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+   <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+   <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <h1>Quotation Details</h1>
 
@@ -61,7 +63,7 @@
         </table>
 </div>
 
-{% comment %} <div>
+<div>
     <div>
         <p><label for="remark">Add Remarks:</label></p>
 
@@ -76,7 +78,7 @@
 
     <div style="float: right; padding-top: 10px; padding-bottom: 20px;">
         <button id="approve"
-        onclick="updateStatus('Approved', '{{ pr.pr_id }}')"
+        onclick="updateStatus('Approved', '{{ q.quotation_id }}')"
         style=" background-color: #4CAF50; /* Green */
         border: none;
         color: white;
@@ -87,7 +89,7 @@
         font-size: 16px;">Approve</button>
 
         <button id="reject"
-        onclick="updateStatus('Rejected', '{{ pr.pr_id }}')"
+        onclick="updateStatus('Rejected', '{{ q.quotation_id }}')"
         style=" background-color: #d13f3f; /* Red */
         border: none;
         color: white;
@@ -109,7 +111,7 @@
         </button>
     </div>
     <div class="modal-body">
-       The following action was completed
+       Action Completed!
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -119,15 +121,15 @@
 </div>
 </div>
 <script>
-    function updateStatus(status_type, pr_id){
+    function updateStatus(status_type, quotation_id){
         var remark= document.getElementById("remark").value;
         console.log(status_type)
         console.log(remark)
         $.ajax({
             type: 'POST',
-            url: '/update_PR/',
+            url: '/update_quotation/',
           data: {
-              "pr_id": pr_id,
+              "quotation_id": quotation_id,
               "status_type": status_type,
               "remark": remark
               },
@@ -141,6 +143,6 @@
           });
     }
 
-</script> {% endcomment %}
+</script>
 
 {% endblock %}

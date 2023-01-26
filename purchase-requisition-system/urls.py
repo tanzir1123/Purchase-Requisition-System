@@ -38,6 +38,11 @@ urlpatterns = [
         name='logout'),
     re_path(r'^dashboard$', main_views.dashboard, name='dashboard'),
 
+    # addItem views
+    path('createpr/', additem_views.create_pr, name='create_pr'),
+    path('create_quotation/', additem_views.create_quotation, name='create_quotation'),
+    
+
 
     # viewsItem views
     # manager views
@@ -51,14 +56,10 @@ urlpatterns = [
     #vendor views
     re_path(r'^vendorviewpr$', viewItemview.vendorviewpr, name='vendorviewpr'),
     path('vendorviewprdetails/<str:pr_id>/', viewItemview.vendorviewprdetails, name='vendorviewprdetails'),
-
     re_path(r'^vendorviewqhistory$', viewItemview.vendorviewqhistory, name='vendorviewqhistory'),
     path('vendorviewqdetails/<str:quotation_id>/', viewItemview.vendorviewqdetails, name='vendorviewqdetails'),
 
-    # addItem views
-    # re_path(r'^additemform$', additem_views.additemform, name='additem_form'),
-    # re_path(r'^additemconfirmation$', additem_views.additemconfirmation, name='additem_confirmation'),
-    path('createpr/', additem_views.create_pr, name='create_pr'),
+    # employee views
     re_path(r'^employeeviewprhistory$', viewItemview.employeeviewprhistory, name='employeeviewprhistory'),
     path('employeeviewprdetails/<str:pr_id>/', viewItemview.employeeviewprdetails, name='employeeviewprdetails'),
     
@@ -70,7 +71,8 @@ urlpatterns = [
     path('purchaserviewqdetails/<str:quotation_id>/', viewItemview.purchaserviewqdetails, name='purchaserviewqdetails'),
     path('purchaserapproveq', viewItemview.purchaserapproveq, name='purchaserapproveq'),
     path('purchaserapproveqdetails/<quotation_id>', viewItemview.purchaserapproveqdetails, name = 'purchaserapproveqdetails'),
-
+    #update
+    path('update_quotation/', viewItemview.update_quotation, name='update_quotation'),
 
     #financeofficer URLs
     re_path(r'^financeofficerviewpr$', viewItemview.financeofficerviewpr, name='financeofficerviewpr'),
