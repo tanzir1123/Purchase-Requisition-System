@@ -1,0 +1,39 @@
+<div>
+    <h1> Quotation List (Viewing as a Finance Officer) </h1>
+    <table>
+        <tr>
+          <th>Q ID</th>
+          <th>Pr Id</th>
+          <th>Approval Status</th>
+          <th>Checked By</th>
+          <th>Total Price</th>
+          <th>Date of Expiry </th>
+          <th>Quotation Terms </th>
+          <th>View</th>
+        </tr>
+        {% for q in q_list %}
+        <tr>
+          <td>{{ q.quotation_id }}</td>
+          <td>{{ q.pr_id }}</td>
+          <td>{{ q.approval_status }}</td>
+          <td>{{ q.checked_by }}</td>
+          <td>{{ q.total_price }}</td>
+          <td>{{ q.date_of_expiry }}</td>
+          <td>{{ q.quotation_terms }}</td>
+          <td><a href="{% url 'financeofficerviewqdetails' q.quotation_id %}">View Quotation Details</a></td>
+          <!-- <td> <button class="view-button" data-pr_id="{{pr.pr_id}}" >View Details</button></td> -->
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+      <!-- <script>
+        var buttons = document.getElementsByClassName("view-button");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].onclick = function() {
+            var pr_id = this.getAttribute("data-pr_id");
+            window.location.href = '/PRdetails/' + pr_id;
+          }
+        }
+      </script>
+       -->
+      

@@ -128,18 +128,18 @@ class PR(models.Model):
 
 
 class PrItem(models.Model):
-    pr_item_id = models.CharField(primary_key=True, max_length=15)
+    pr_item_id = models.AutoField(primary_key=True)
     pr_id = models.ForeignKey(PR, on_delete=models.CASCADE)
     pr_item_name = models.CharField(max_length=40, null=True)
     pr_item_qty = models.PositiveIntegerField(default=None, null=True)
     pr_item_description = models.CharField(
         max_length=100, default=None, null=True, blank=True)
 
-    # Saving with the prefix in the database.
-    def save(self, *args, **kwargs):
-        if not self.pr_item_id.startswith('PRItem'):
-            self.pr_item_id = 'PRItem' + self.pr_item_id
-        super().save(*args, **kwargs)
+    # # Saving with the prefix in the database.
+    # def save(self, *args, **kwargs):
+    #     if not self.pr_item_id.startswith('PRItem'):
+    #         self.pr_item_id = 'PRItem' + self.pr_item_id
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.pr_item_id)

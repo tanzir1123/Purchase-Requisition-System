@@ -73,5 +73,7 @@ urlpatterns = [
     #financeofficer URLs
     re_path(r'^financeofficerviewpr$', viewItemview.financeofficerviewpr, name='financeofficerviewpr'),
     path('financeofficerviewprdetails/<str:pr_id>/', viewItemview.financeofficerviewprdetails, name='financeofficerviewprdetails'),
+    re_path(r'^financeofficerviewq$', viewItemview.financeofficerviewq, name='financeofficerviewq'),
+    path('financeofficerviewqdetails/<str:quotation_id>/', viewItemview.financeofficerviewqdetails, name='financeofficerviewqdetails'),
     
 ]

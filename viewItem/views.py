@@ -47,15 +47,18 @@ def update_PR(request):
         pr_id = request.POST.get('pr_id')
         status_type = request.POST.get('status_type')
         remark = request.POST.get('remark')
+        manager_id = Manager.objects.get(user=request.user).manager_id
 
         print(status_type + " " + remark)
 
         if status_type == 'Approved':
             PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
             PR.objects.filter(pr_id=pr_id).update(manager_remark=remark)
+            PR.objects.filter(pr_id=pr_id).update(marked_by=manager_id)
         elif status_type == 'Rejected':
             PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
             PR.objects.filter(pr_id=pr_id).update(manager_remark=remark)
+            PR.objects.filter(pr_id=pr_id).update(marked_by=manager_id)
         return JsonResponse("Status saved", safe=False)
     else:
         return HttpResponseBadRequest("Invalid request method")
@@ -130,6 +133,17 @@ def purchaserviewqdetails(request, quotation_id):
     context = {'q' : q, 'q_items': q_items}
     return render(request, 'purchaser/purchaserviewqdetails.html',context)
 
+@login_required
+def purchaserapproveq(request):
+    q_list = Quotation.objects.filter(approval_status__in=['Pending']).values()
+    context = {'q_list': q_list}
+    return render(request, 'purchaser/purchaserapproveq.html', context)
+
+def purchaserviewqdetails(request, quotation_id):
+    q = Quotation.objects.get(quotation_id=quotation_id)
+    q_items = QuotationItem.objects.filter(quotation_id=quotation_id)
+
+
 
 @login_required
 def financeofficerviewpr(request):
@@ -143,3 +157,14 @@ def financeofficerviewprdetails(request, pr_id):
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'financeofficer/financeofficerviewprdetails.html', context)
 
+@login_required
+def financeofficerviewq(request):
+    q_list = Quotation.objects.all()
+    context = {'q_list': q_list}
+    return render(request, 'financeofficer/financeofficerviewq.html', context)
+
+def financeofficerviewqdetails(request, quotation_id):
+    q = Quotation.objects.get(quotation_id=quotation_id)
+    q_items = QuotationItem.objects.filter(quotation_id=quotation_id)
+    context = {'q' : q, 'q_items': q_items}
+    return render(request, 'financeofficer/financeofficerviewqdetails.html',context)

@@ -26,18 +26,29 @@
         <label for="status">Status:</label>
         <input type="text" readonly id="status" name="approval_status" value="Pending"><br>
         
-        <table id="pr_item_table">
+        {% comment %} <table id="pr_item_table">
             <tr>
             <th>Item Name</th>
             <th>Item Quantity</th>
             <th>Item Description</th>
             <th>Action</th>
             </tr>
-        </table>
+        </table> {% endcomment %}
 
-        <button onclick="addItem(event)" 
+        {% comment %} <button onclick="addItem(event)" 
         style="background-color: #2D92E2;"
-        class="btn-primary btn-md btn-block mx-auto" >Add Item</button>
+        class="btn-primary btn-md btn-block mx-auto" >Add Item</button> {% endcomment %}
+        
+        <div class="items-container"></div>
+
+        <label for="numberOfFields"style=" font-family: 'Inknut Antiqua';
+          font-style: normal;font-weight: 700;">Add Item</label>
+          <input type="number" class="form-control add-field-input"
+                  name="number_of_items"
+                  id="numberOfFields" value="" 
+                  style="background: rgba(123, 242, 254, 0.7);
+          border-radius: 50px; border:none;">
+
         <button type="submit" value="Submit">Create PR</button>
     </form>
 </div>
@@ -46,7 +57,30 @@
 <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
 <script src="{% static 'app/scripts/respond.js' %}"></script>
 <script>
-    // Add a new PR item to the table
+
+  $('.add-field-input').on('change', function() {
+    var numberOfFields = $(this).val();
+    $('.items-container').empty();
+    for(var i = 0; i < numberOfFields; i++) {
+        $('.items-container').append(`
+            <tr class="item-field">
+                <td>
+                    <label>Item Name</label>
+                    <input type="text" name="pr_item_name" class="form-control item-name">
+                </td>
+                <td>
+                    <label>Item Quantity</label>
+                    <input type="number" name="pr_item_qty" class="form-control item-quantity">
+                </td>
+                <td>
+                  <label>Item Description</label>
+                  <input type="text" name="pr_item_description" class="form-control item-description">
+              </td>
+            </tr>
+        `);
+    }
+});
+    {% comment %} // Add a new PR item to the table
     function addItem(event) {
     console.log("Add Item Clicked");
     event.preventDefault();
@@ -57,12 +91,12 @@
       var itemDescCell = row.insertCell(2);
       var actionCell = row.insertCell(3);
   
-      itemNameCell.innerHTML = '<input type="text" name="item_name[]">';
-      itemQtyCell.innerHTML = '<input type="number" name="item_qty[]">';
-      itemDescCell.innerHTML = '<input type="text" name="item_desc[]">';
+      itemNameCell.innerHTML = '<input type="text" name="pr_item_name[]">';
+      itemQtyCell.innerHTML = '<input type="number" name="pr_item_qty[]">';
+      itemDescCell.innerHTML = '<input type="text" name="pr_item_description[]">';
       actionCell.innerHTML = '<button onclick="deleteRow(this)">Delete</button>';
     }
-  
+   {% endcomment %}
     // Delete a PR item from the table
     function deleteRow(btn) {
       var row = btn.parentNode.parentNode;
