@@ -176,18 +176,15 @@ class Quotation(models.Model):
 
 
 class QuotationItem(models.Model):
-    q_item_id = models.CharField(primary_key=True, max_length=15)
+    q_item_id = models.AutoField(primary_key=True)
     quotation_id = models.ForeignKey(Quotation, on_delete=models.CASCADE)
     q_item_name = models.CharField(max_length=20, null=True)
     q_item_unit_price = models.FloatField(default=None, null=True)
     q_item_qty = models.PositiveIntegerField(default=None, null=True)
     q_item_price = models.FloatField(default=None, null=True, blank=True)
 
-    # Saving with the prefix in the database.
-    def save(self, *args, **kwargs):
-        if not self.q_item_id.startswith('QItem'):
-            self.q_item_id = 'QItem' + self.q_item_id
-        # Saving the Q_Item_Price
+    # Saving the Q_Item_Price
+    def save(self, *args, **kwargs): 
         self.q_item_price = self.q_item_unit_price * self.q_item_qty
         super().save(*args, **kwargs)
 
@@ -210,18 +207,15 @@ class Purchaseorder(models.Model):
 
 
 class POItem(models.Model):
-    po_item_id = models.CharField(primary_key=True, max_length=15)
+    po_item_id = models.AutoField(primary_key=True)
     po_id = models.ForeignKey(Purchaseorder, on_delete=models.CASCADE)
     po_item_name = models.CharField(max_length=20, null=True)
     po_unit_price = models.FloatField(default=None, null=True)
     po_item_qty = models.PositiveIntegerField(default=None, null=True)
     po_item_price = models.FloatField(default=None, null=True, blank=True)
 
-# Saving with the prefix in the database.
+    # Saving the PO_Item_Price
     def save(self, *args, **kwargs):
-        if not self.po_item_id.startswith('POItem'):
-            self.po_item_id = 'POItem' + self.po_item_id
-        # Saving the Q_Item_Price
         self.q_item_price = self.po_unit_price * self.po_item_qty
         super().save(*args, **kwargs)
 
