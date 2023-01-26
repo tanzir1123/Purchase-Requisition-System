@@ -65,20 +65,20 @@ def dashboard(request):
         print("dEBUGGG: YES IAM THE FINANCE OFFICER\n\n\n")
 
     if (is_employee == True):
-        mydata = Employee.objects.get(user=request.user).employee_id
+        mydata = Employee.objects.get(user=request.user)
     elif (is_manager == True):
-        mydata = Manager.objects.get(user=request.user).manager_id
+        mydata = Manager.objects.get(user=request.user)
     elif (is_vendor == True):
-        mydata = Vendor.objects.get(user=request.user).vendor_id
+        mydata = Vendor.objects.get(user=request.user)
     elif (is_purchaser == True):
-        mydata = Purchaser.objects.get(user=request.user).purchaser_id
+        mydata = Purchaser.objects.get(user=request.user)
     elif (is_finance_officer == True):
         mydata = Financeofficer.objects.get(
-            user=request.user).financeofficer_id
+            user=request.user)
 
     print(mydata)
     context = {
-        'user_data': mydata,
+        'mydata': mydata,
         'is_employee': is_employee,
         'is_manager': is_manager,
         'is_vendor': is_vendor,

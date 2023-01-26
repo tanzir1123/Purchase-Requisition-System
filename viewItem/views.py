@@ -28,7 +28,7 @@ def managerviewprdetails(request, pr_id):
 
 
 def manager_approve_pr(request):
-    pr_list = PR.objects.filter(approval_status__in=['Pending']).values()
+    pr_list = PR.objects.filter(approval_status__in=['Pending'])
     context = {'pr_list': pr_list}
     return render(request, 'manager/managerapprovepr.html', context)
 
@@ -66,7 +66,7 @@ def update_PR(request):
 
 @login_required
 def vendorviewpr(request):
-    pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
+    pr_list = PR.objects.filter(approval_status__in=['Approved'])
     context = {'pr_list': pr_list}
     return render(request, 'vendor/vendorviewpr.html', context)
 
@@ -94,7 +94,7 @@ def vendorviewqdetails(request, quotation_id):
 @login_required
 def employeeviewprhistory(request):
     user_id = Employee.objects.get(user=request.user).employee_id
-    pr_list = PR.objects.filter(submitted_by=user_id).values()
+    pr_list = PR.objects.filter(submitted_by=user_id)
     context = {'pr_list': pr_list}
     return render(request, 'employee/employeeviewprhistory.html', context)
 
@@ -108,7 +108,7 @@ def employeeviewprdetails(request, pr_id):
 
 @login_required
 def purchaserviewpr(request):
-    pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
+    pr_list = PR.objects.filter(approval_status__in=['Approved'])
     context = {'pr_list': pr_list}
     return render(request, 'purchaser/purchaserviewpr.html', context)
 
@@ -169,7 +169,7 @@ def update_quotation(request):
 
 @login_required
 def financeofficerviewpr(request):
-    pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
+    pr_list = PR.objects.filter(approval_status__in=['Approved'])
     context = {'pr_list': pr_list}
     return render(request, 'financeofficer/financeofficerviewpr.html', context)
 
@@ -181,7 +181,7 @@ def financeofficerviewprdetails(request, pr_id):
 
 @login_required
 def financeofficerviewq(request):
-    q_list = Quotation.objects.filter(approval_status__in=['Approved']).values()
+    q_list = Quotation.objects.all()
     context = {'q_list': q_list}
     return render(request, 'financeofficer/financeofficerviewq.html', context)
 
@@ -194,12 +194,14 @@ def financeofficerviewqdetails(request, quotation_id):
 @login_required
 def financeofficerviewpohistory(request):
     user_id = Financeofficer.objects.get(user=request.user).financeofficer_id
-    po_list = Purchaseorder.objects.filter(financeOfficerId=user_id).values()
+    po_list = Purchaseorder.objects.filter(financeOfficerId=user_id)
     context = {'po_list': po_list}
     return render(request, 'financeofficer/financeofficerviewpohistory.html', context)
 
 def financeofficerviewpodetails(request, po_id):
     po = Purchaseorder.objects.get(po_id=po_id)
-    po_items = Purchaseorder.objects.filter(po_id=po_id)
+    po_items = POItem.objects.filter(po_id=po_id)
+    
+    print(po_items)
     context = {'po' : po, 'po_items': po_items}
     return render(request, 'financeofficer/financeofficerviewpodetails.html', context)

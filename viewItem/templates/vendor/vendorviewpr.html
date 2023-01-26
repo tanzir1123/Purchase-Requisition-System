@@ -5,7 +5,7 @@
     {% load static %}
      <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
      <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
-     <link rel="stylesheet" type="text/css" href="{% static 'app/content/detailsview.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'app/content/tableview.css' %}" />
      <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +24,7 @@
         <tr>
           <td>{{ pr.pr_id }}</td>
           <td>{{ pr.marked_by }}</td>
-          <td>{{pr.manager_remark}}</td>
+          <td>{{ pr.manager_remark }}</td>
           <td>{{ pr.date_created }}</td>
           <td><a href="{% url 'vendorviewprdetails' pr.pr_id %}">View PR Details</a></td>
           <!-- <td> <button class="view-button" data-pr_id="{{pr.pr_id}}" >View Details</button></td> -->
