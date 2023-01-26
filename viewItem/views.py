@@ -80,3 +80,15 @@ def employeeviewprdetails(request, pr_id):
     pr_items = PrItem.objects.filter(pr_id=pr_id)
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'employee/employeeviewprdetails.html', context)
+
+@login_required
+def purchaserviewpr(request):
+    pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
+    context = {'pr_list': pr_list}
+    return render(request, 'purchaser/purchaserviewpr.html', context)
+
+def purchaserviewprdetails(request, pr_id):
+    pr = PR.objects.get(pr_id=pr_id)
+    pr_items = PrItem.objects.filter(pr_id=pr_id)
+    context = {'pr': pr, 'pr_items': pr_items}
+    return render(request, 'purchaser/purchaserviewprdetails.html', context)

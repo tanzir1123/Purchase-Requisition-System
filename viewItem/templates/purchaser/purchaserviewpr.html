@@ -1,0 +1,37 @@
+<div>
+
+    <table>
+        <tr>
+          <th>ID</th>
+          <th>Submitted By</th>
+          <th>Approval Status</th>
+          <th>Marked By</th>
+          <th>Manager Remark</th>
+          <th>Date Created</th>
+          <th>View</th>
+        </tr>
+        {% for pr in pr_list %}
+        <tr>
+          <td>{{ pr.pr_id }}</td>
+          <td>{{ pr.submitted_by }}</td>
+          <td>{{ pr.approval_status }}</td>
+          <td>{{ pr.marked_by }}</td>
+          <td>{{ pr.manager_remark }}</td>
+          <td>{{ pr.date_created }}</td>
+          <td><a href="{% url 'purchaserviewprdetails' pr.pr_id %}">View Details</a></td>
+          <!-- <td> <button class="view-button" data-pr_id="{{pr.pr_id}}" >View Details</button></td> -->
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+      <!-- <script>
+        var buttons = document.getElementsByClassName("view-button");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].onclick = function() {
+            var pr_id = this.getAttribute("data-pr_id");
+            window.location.href = '/PRdetails/' + pr_id;
+          }
+        }
+      </script>
+       -->
+      
