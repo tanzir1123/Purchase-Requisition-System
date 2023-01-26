@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='quotation',
             name='vendor_id',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, to='app.vendor'),
+            field=models.ForeignKey(blank=True, default=None, null=True,
+                                    on_delete=django.db.models.deletion.PROTECT, to='app.vendor'),
         ),
         migrations.AlterField(
             model_name='quotationitem',
@@ -27,26 +28,34 @@ class Migration(migrations.Migration):
             field=models.FloatField(blank=True, default=None, null=True),
         ),
         migrations.CreateModel(
-            name='PurchaseOrder',
+            name='Purchaseorder',
             fields=[
-                ('po_id', models.CharField(max_length=15, primary_key=True, serialize=False)),
+                ('po_id', models.CharField(max_length=15,
+                 primary_key=True, serialize=False)),
                 ('total_price', models.FloatField(blank=True, null=True)),
                 ('date_created', models.DateField()),
-                ('q_payment_terms', models.CharField(blank=True, max_length=100, null=True)),
-                ('financeOfficerId', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, to='app.financeofficer')),
-                ('pr_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.pr')),
-                ('quotation_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.quotation')),
+                ('q_payment_terms', models.CharField(
+                    blank=True, max_length=100, null=True)),
+                ('financeOfficerId', models.ForeignKey(blank=True, default=None, null=True,
+                 on_delete=django.db.models.deletion.SET_NULL, to='app.financeofficer')),
+                ('pr_id', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='app.pr')),
+                ('quotation_id', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='app.quotation')),
             ],
         ),
         migrations.CreateModel(
             name='POItem',
             fields=[
-                ('po_item_id', models.CharField(max_length=15, primary_key=True, serialize=False)),
+                ('po_item_id', models.CharField(
+                    max_length=15, primary_key=True, serialize=False)),
                 ('po_item_name', models.CharField(max_length=20, null=True)),
                 ('po_unit_price', models.FloatField(default=None, null=True)),
                 ('po_item_qty', models.PositiveIntegerField(default=None, null=True)),
-                ('po_item_price', models.FloatField(blank=True, default=None, null=True)),
-                ('po_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.purchaseorder')),
+                ('po_item_price', models.FloatField(
+                    blank=True, default=None, null=True)),
+                ('po_id', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='app.purchaseorder')),
             ],
         ),
     ]

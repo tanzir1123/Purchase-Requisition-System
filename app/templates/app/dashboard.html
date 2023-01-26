@@ -53,6 +53,9 @@
             
             {% elif is_purchaser %}
             <a href="{% url 'purchaserviewpr' %}"> View PR </a>
+            
+            {% elif is_finance_officer %}
+            <a href="{% url 'financeofficerviewpr' %}"> View PR </a>
             {% endif %}
         </div>
         

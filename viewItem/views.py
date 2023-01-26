@@ -11,11 +11,13 @@ from datetime import datetime
 from app.models import Manager
 from app.models import *
 
+
 @login_required
 def managerviewpr(request):
     pr_list = PR.objects.all()
     context = {'pr_list': pr_list}
     return render(request, 'manager/managerviewpr.html', context)
+
 
 @login_required
 def managerviewprdetails(request, pr_id):
@@ -24,10 +26,12 @@ def managerviewprdetails(request, pr_id):
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'manager/prdetails.html', context)
 
+
 def manager_approve_pr(request):
     pr_list = PR.objects.filter(approval_status__in=['Pending']).values()
     context = {'pr_list': pr_list}
     return render(request, 'manager/managerapprovepr.html', context)
+
 
 def manager_approve_pr_details(request, pr_id):
     pr = PR.objects.get(pr_id=pr_id)
@@ -44,7 +48,7 @@ def update_PR(request):
         status_type = request.POST.get('status_type')
         remark = request.POST.get('remark')
 
-        print(status_type +" "+ remark)
+        print(status_type + " " + remark)
 
         if status_type == 'Approved':
             PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
@@ -56,17 +60,20 @@ def update_PR(request):
     else:
         return HttpResponseBadRequest("Invalid request method")
 
+
 @login_required
 def vendorviewpr(request):
     pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
     context = {'pr_list': pr_list}
     return render(request, 'vendor/vendorviewpr.html', context)
 
+
 def vendorviewprdetails(request, pr_id):
     pr = PR.objects.get(pr_id=pr_id)
     pr_items = PrItem.objects.filter(pr_id=pr_id)
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'vendor/vendorviewprdetails.html', context)
+
 
 @login_required
 def employeeviewprhistory(request):
@@ -75,11 +82,13 @@ def employeeviewprhistory(request):
     context = {'pr_list': pr_list}
     return render(request, 'employee/employeeviewprhistory.html', context)
 
+
 def employeeviewprdetails(request, pr_id):
     pr = PR.objects.get(pr_id=pr_id)
     pr_items = PrItem.objects.filter(pr_id=pr_id)
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'employee/employeeviewprdetails.html', context)
+
 
 @login_required
 def purchaserviewpr(request):
@@ -87,8 +96,23 @@ def purchaserviewpr(request):
     context = {'pr_list': pr_list}
     return render(request, 'purchaser/purchaserviewpr.html', context)
 
+
 def purchaserviewprdetails(request, pr_id):
     pr = PR.objects.get(pr_id=pr_id)
     pr_items = PrItem.objects.filter(pr_id=pr_id)
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'purchaser/purchaserviewprdetails.html', context)
+
+
+@login_required
+def financeofficerviewpr(request):
+    pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
+    context = {'pr_list': pr_list}
+    return render(request, 'financeofficer/financeofficerviewpr.html', context)
+
+def financeofficerviewprdetails(request, pr_id):
+    pr = PR.objects.get(pr_id=pr_id)
+    pr_items = PrItem.objects.filter(pr_id=pr_id)
+    context = {'pr': pr, 'pr_items': pr_items}
+    return render(request, 'financeofficer/financeofficerviewprdetails.html', context)
+
