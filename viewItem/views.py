@@ -118,6 +118,20 @@ def purchaserviewprdetails(request, pr_id):
 
 
 @login_required
+def purchaserviewq(request):
+    q_list = Quotation.objects.all()
+    context = {'q_list': q_list}
+    return render(request, 'purchaser/purchaserviewq.html', context)
+
+
+def purchaserviewqdetails(request, quotation_id):
+    q = Quotation.objects.get(quotation_id=quotation_id)
+    q_items = QuotationItem.objects.filter(quotation_id=quotation_id)
+    context = {'q' : q, 'q_items': q_items}
+    return render(request, 'purchaser/purchaserviewqdetails.html',context)
+
+
+@login_required
 def financeofficerviewpr(request):
     pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
     context = {'pr_list': pr_list}
