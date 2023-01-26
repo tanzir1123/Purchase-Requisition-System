@@ -46,10 +46,10 @@ def update_PR(request):
 
         print(status_type +" "+ remark)
 
-        if status_type == 'Approve':
+        if status_type == 'Approved':
             PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
             PR.objects.filter(pr_id=pr_id).update(manager_remark=remark)
-        elif status_type == 'Reject':
+        elif status_type == 'Rejected':
             PR.objects.filter(pr_id=pr_id).update(approval_status=status_type)
             PR.objects.filter(pr_id=pr_id).update(manager_remark=remark)
         return JsonResponse("Status saved", safe=False)
@@ -61,3 +61,9 @@ def vendorviewpr(request):
     pr_list = PR.objects.filter(approval_status__in=['Approved']).values()
     context = {'pr_list': pr_list}
     return render(request, 'vendor/vendorviewpr.html', context)
+
+def vendorviewprdetails(request, pr_id):
+    pr = PR.objects.get(pr_id=pr_id)
+    pr_items = PrItem.objects.filter(pr_id=pr_id)
+    context = {'pr': pr, 'pr_items': pr_items}
+    return render(request, 'vendor/vendorviewprdetails.html', context)

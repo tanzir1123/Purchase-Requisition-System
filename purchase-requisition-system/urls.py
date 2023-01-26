@@ -50,6 +50,7 @@ urlpatterns = [
 
     #vendor views
     re_path(r'^vendorviewpr$', viewItemview.vendorviewpr, name='vendorviewpr'),
+    path('vendorviewprdetails/<str:pr_id>/', viewItemview.vendorviewprdetails, name='vendorviewprdetails'),
 
     # addItem views
     # re_path(r'^additemform$', additem_views.additemform, name='additem_form'),

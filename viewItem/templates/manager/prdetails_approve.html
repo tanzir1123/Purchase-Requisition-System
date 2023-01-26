@@ -71,7 +71,7 @@
 
     <div style="float: right; padding-top: 10px; padding-bottom: 20px;">
         <button id="approve"
-        onclick="updateStatus('Approve', '{{ pr.pr_id }}')"
+        onclick="updateStatus('Approved', '{{ pr.pr_id }}')"
         style=" background-color: #4CAF50; /* Green */
         border: none;
         color: white;
@@ -82,7 +82,7 @@
         font-size: 16px;">Approve</button>
 
         <button id="reject"
-        onclick="updateStatus('Reject', '{{ pr.pr_id }}')"
+        onclick="updateStatus('Rejected', '{{ pr.pr_id }}')"
         style=" background-color: #d13f3f; /* Red */
         border: none;
         color: white;
