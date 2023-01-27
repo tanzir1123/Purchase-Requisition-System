@@ -14,7 +14,7 @@
             {% if is_manager %}
                 <a href="{% url 'managerviewpr' %}">View PR</a>
                 <a href="{% url 'manager_approve_pr' %}">Approve PR</a>
-                <a href="">View PO</a>
+                <a href="{% url 'managerviewpo' %}">View PO</a>
             
             {% elif is_employee %}
             <a href="{% url 'create_pr' %}">Create PR</a>

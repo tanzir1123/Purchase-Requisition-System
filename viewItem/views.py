@@ -40,7 +40,6 @@ def manager_approve_pr_details(request, pr_id):
     context = {'pr': pr, 'pr_items': pr_items}
     return render(request, 'manager/prdetails_approve.html', context)
 
-
 @csrf_exempt
 def update_PR(request):
     if request.method == 'POST':
@@ -62,6 +61,19 @@ def update_PR(request):
         return JsonResponse("Status saved", safe=False)
     else:
         return HttpResponseBadRequest("Invalid request method")
+
+@login_required
+def managerviewpo(request):
+    po_list = Purchaseorder.objects.all()
+    context = {'po_list': po_list}
+    return render(request, 'manager/managerviewpo.html', context)
+
+def managerviewpodetails(request, po_id):
+    po = Purchaseorder.objects.get(po_id=po_id)
+    po_items = POItem.objects.filter(po_id=po_id)
+    
+    context = {'po' : po, 'po_items': po_items}
+    return render(request, 'manager/managerviewpodetails.html', context)
 
 
 @login_required
@@ -205,3 +217,4 @@ def financeofficerviewpodetails(request, po_id):
     print(po_items)
     context = {'po' : po, 'po_items': po_items}
     return render(request, 'financeofficer/financeofficerviewpodetails.html', context)
+

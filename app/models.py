@@ -202,6 +202,11 @@ class Purchaseorder(models.Model):
     date_created = models.DateField()
     po_terms = models.CharField(max_length=100, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        if not self.po_id.startswith('PO'):
+            self.po_id = 'PO' + self.po_id
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return str(self.po_id)
 

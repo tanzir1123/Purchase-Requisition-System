@@ -50,6 +50,10 @@ urlpatterns = [
     path('prdetails/<str:pr_id>/', viewItemview.managerviewprdetails, name='managerviewprdetails'),
     path('manager_approve_pr', viewItemview.manager_approve_pr, name='manager_approve_pr'),
     path('prdetails_approve/<str:pr_id>/', viewItemview.manager_approve_pr_details, name='manager_approve_pr_details'),
+    re_path(r'^managerviewpo$', viewItemview.managerviewpo, name='managerviewpo'),
+    path('managerviewpodetails/<po_id>/', viewItemview.managerviewpodetails, name='managerviewpodetails'),
+    
+    
     # update 
     path('update_PR/', viewItemview.update_PR, name='update_PR'),
 
