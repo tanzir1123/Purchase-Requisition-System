@@ -193,7 +193,7 @@ def financeofficerviewprdetails(request, pr_id):
 
 @login_required
 def financeofficerviewq(request):
-    q_list = Quotation.objects.all()
+    q_list = Quotation.objects.filter(approval_status__in=['Approved'])
     context = {'q_list': q_list}
     return render(request, 'financeofficer/financeofficerviewq.html', context)
 
