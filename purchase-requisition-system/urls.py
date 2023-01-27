@@ -31,59 +31,85 @@ urlpatterns = [
     re_path(r'^contact$', main_views.contact, name='contact'),
     re_path(r'^about$', main_views.about, name='about'),
     re_path(r'^login/$',
-        LoginView.as_view(template_name = 'app/login.html'),
-        name='login'),
+            LoginView.as_view(template_name='app/login.html'),
+            name='login'),
     re_path(r'^logout$',
-        LogoutView.as_view(template_name = 'app/index.html'),
-        name='logout'),
+            LogoutView.as_view(template_name='app/index.html'),
+            name='logout'),
     re_path(r'^dashboard$', main_views.dashboard, name='dashboard'),
 
     # addItem views
     path('createpr/', additem_views.create_pr, name='create_pr'),
-    path('create_quotation/<str:pr_id>/', additem_views.create_quotation, name='create_quotation'),
-     path('create_po/<str:quotation_id>/', additem_views.create_po, name='create_po'),
+    path('create_quotation/<str:pr_id>/',
+         additem_views.create_quotation, name='create_quotation'),
+    path('create_po/<str:quotation_id>/',
+         additem_views.create_po, name='create_po'),
 
 
     # viewsItem views
     # manager views
     re_path(r'^managerviewpr$', viewItemview.managerviewpr, name='managerviewpr'),
-    path('prdetails/<str:pr_id>/', viewItemview.managerviewprdetails, name='managerviewprdetails'),
-    path('manager_approve_pr', viewItemview.manager_approve_pr, name='manager_approve_pr'),
-    path('prdetails_approve/<str:pr_id>/', viewItemview.manager_approve_pr_details, name='manager_approve_pr_details'),
+    path('prdetails/<str:pr_id>/', viewItemview.managerviewprdetails,
+         name='managerviewprdetails'),
+    path('manager_approve_pr', viewItemview.manager_approve_pr,
+         name='manager_approve_pr'),
+    path('prdetails_approve/<str:pr_id>/',
+         viewItemview.manager_approve_pr_details, name='manager_approve_pr_details'),
     re_path(r'^managerviewpo$', viewItemview.managerviewpo, name='managerviewpo'),
-    path('managerviewpodetails/<po_id>/', viewItemview.managerviewpodetails, name='managerviewpodetails'),
-    
-    
-    # update 
+    path('managerviewpodetails/<po_id>/',
+         viewItemview.managerviewpodetails, name='managerviewpodetails'),
+
+
+    # update the PR
     path('update_PR/', viewItemview.update_PR, name='update_PR'),
 
-    #vendor views
-    re_path(r'^vendorviewpr$', viewItemview.vendorviewpr, name='vendorviewpr'),
-    path('vendorviewprdetails/<str:pr_id>/', viewItemview.vendorviewprdetails, name='vendorviewprdetails'),
-    re_path(r'^vendorviewqhistory$', viewItemview.vendorviewqhistory, name='vendorviewqhistory'),
-    path('vendorviewqdetails/<str:quotation_id>/', viewItemview.vendorviewqdetails, name='vendorviewqdetails'),
-
     # employee views
-    re_path(r'^employeeviewprhistory$', viewItemview.employeeviewprhistory, name='employeeviewprhistory'),
-    path('employeeviewprdetails/<str:pr_id>/', viewItemview.employeeviewprdetails, name='employeeviewprdetails'),
-    
-    
-    #purchaser URLs
-    re_path(r'^purchaserviewpr$', viewItemview.purchaserviewpr, name='purchaserviewpr'),
-    path('purchaserviewprdetails/<str:pr_id>/', viewItemview.purchaserviewprdetails, name='purchaserviewprdetails'),
-    re_path(r'^purchaserviewq$', viewItemview.purchaserviewq, name='purchaserviewq'),
-    path('purchaserviewqdetails/<str:quotation_id>/', viewItemview.purchaserviewqdetails, name='purchaserviewqdetails'),
-    path('purchaserapproveq', viewItemview.purchaserapproveq, name='purchaserapproveq'),
-    path('purchaserapproveqdetails/<quotation_id>', viewItemview.purchaserapproveqdetails, name = 'purchaserapproveqdetails'),
-    #update
-    path('update_quotation/', viewItemview.update_quotation, name='update_quotation'),
+    re_path(r'^employeeviewprhistory$',
+            viewItemview.employeeviewprhistory, name='employeeviewprhistory'),
+    path('employeeviewprdetails/<str:pr_id>/',
+         viewItemview.employeeviewprdetails, name='employeeviewprdetails'),
 
-    #financeofficer URLs
-    re_path(r'^financeofficerviewpr$', viewItemview.financeofficerviewpr, name='financeofficerviewpr'),
-    path('financeofficerviewprdetails/<str:pr_id>/', viewItemview.financeofficerviewprdetails, name='financeofficerviewprdetails'),
-    re_path(r'^financeofficerviewq$', viewItemview.financeofficerviewq, name='financeofficerviewq'),
-    path('financeofficerviewqdetails/<str:quotation_id>/', viewItemview.financeofficerviewqdetails, name='financeofficerviewqdetails'),
-    re_path(r'^financeofficerviewpohistory$', viewItemview.financeofficerviewpohistory, name='financeofficerviewpohistory'),
-    path('financeofficerviewpodetails/<po_id>/', viewItemview.financeofficerviewpodetails, name='financeofficerviewpodetails'),
-    
+
+    # vendor views
+    re_path(r'^vendorviewpr$', viewItemview.vendorviewpr, name='vendorviewpr'),
+    path('vendorviewprdetails/<str:pr_id>/',
+         viewItemview.vendorviewprdetails, name='vendorviewprdetails'),
+    re_path(r'^vendorviewqhistory$', viewItemview.vendorviewqhistory,
+            name='vendorviewqhistory'),
+    path('vendorviewqdetails/<str:quotation_id>/',
+         viewItemview.vendorviewqdetails, name='vendorviewqdetails'),
+
+
+
+    # purchaser URLs
+    re_path(r'^purchaserviewpr$', viewItemview.purchaserviewpr,
+            name='purchaserviewpr'),
+    path('purchaserviewprdetails/<str:pr_id>/',
+         viewItemview.purchaserviewprdetails, name='purchaserviewprdetails'),
+    re_path(r'^purchaserviewq$', viewItemview.purchaserviewq,
+            name='purchaserviewq'),
+    path('purchaserviewqdetails/<str:quotation_id>/',
+         viewItemview.purchaserviewqdetails, name='purchaserviewqdetails'),
+    path('purchaserapproveq', viewItemview.purchaserapproveq,
+         name='purchaserapproveq'),
+    path('purchaserapproveqdetails/<quotation_id>',
+         viewItemview.purchaserapproveqdetails, name='purchaserapproveqdetails'),
+    # update
+    path('update_quotation/', viewItemview.update_quotation,
+         name='update_quotation'),
+
+    # financeofficer URLs
+    re_path(r'^financeofficerviewpr$',
+            viewItemview.financeofficerviewpr, name='financeofficerviewpr'),
+    path('financeofficerviewprdetails/<str:pr_id>/',
+         viewItemview.financeofficerviewprdetails, name='financeofficerviewprdetails'),
+    re_path(r'^financeofficerviewq$', viewItemview.financeofficerviewq,
+            name='financeofficerviewq'),
+    path('financeofficerviewqdetails/<str:quotation_id>/',
+         viewItemview.financeofficerviewqdetails, name='financeofficerviewqdetails'),
+    re_path(r'^financeofficerviewpohistory$',
+            viewItemview.financeofficerviewpohistory, name='financeofficerviewpohistory'),
+    path('financeofficerviewpodetails/<po_id>/',
+         viewItemview.financeofficerviewpodetails, name='financeofficerviewpodetails'),
+
 ]

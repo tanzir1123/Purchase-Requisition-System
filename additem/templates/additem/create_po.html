@@ -52,9 +52,39 @@
           id="number_of_items" value="" 
           >
 
+        
           <div style="display: flex; align-items: center; justify-content: center;">
             <button type="submit" value="Submit" class="btn btn-primary" style="margin-top:20px">Create Purchase Order</button>
         </div>
+        
+        <script>
+            $(document).ready(function(){
+                $("form").submit(function(){
+                    alert("Purchase Order creation success");
+                });
+            });
+        </script>
+
+
+        <div id="alert-area" style="display: none;"></div>
+
+    <script>
+        $(document).ready(function(){
+            $("form").submit(function(){
+                $("#alert-area").html(`
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        Purchase Order creation success.
+                    </div>
+                `);
+                $("#alert-area").show();
+            });
+        });
+    </script>
+
+
+
+
 </form>
 </div>
 
