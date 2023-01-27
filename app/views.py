@@ -14,7 +14,7 @@ def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
     if request.user.is_authenticated:
-        return (redirect('/menu'))
+        return (redirect('/login'))
     else:
         return render(
             request,
