@@ -39,9 +39,30 @@
         
     </div>
 
-    <div class="body">
-        
-    </div>
+    <div class="body text-center" style="margin-top: 50px;">
+        {% if is_manager %}
+        <h3>ID: <strong>{{ mydata.manager_id }}</strong></h3>
+        <h3>Name: <strong>{{ mydata.manager_name }}</strong></h3>
+        <h3>Contact: <strong>{{ mydata.manager_contact }}</strong></h3>
+        {% elif is_employee %}
+        <h3>ID: <strong>{{ mydata.employee_id }}</strong></h3>
+        <h3>Name: <strong>{{ mydata.employee_name }}</strong></h3>
+        <h3>Contact: <strong>{{ mydata.employee_contact }}</strong></h3>
+        {% elif is_vendor %} 
+        <h3>ID: <strong>{{ mydata.vendor_id }}</strong></h3>
+        <h3>Name: <strong>{{ mydata.vendor_name }}</strong></h3>
+        <h3>Contact: <strong>{{ mydata.vendor_contact }}</strong></h3>
+        {% elif is_purchaser %}
+        <h3>ID: <strong>{{ mydata.purchaser_id }}</strong></h3>
+        <h3>Name: <strong>{{ mydata.purchaser_name }}</strong></h3>
+        <h3>Contact: <strong>{{ mydata.purchaser_contact }}</strong></h3>
+        {% elif is_finance_officer %}
+        <h3>ID: <strong>{{ mydata.financeofficer_id }}</strong></h3>
+        <h3>Name: <strong>{{ mydata.financeofficer_name }}</strong></h3>
+        <h3>Contact: <strong>{{ mydata.financeofficer_contact }}</strong></h3>
+        {% endif %} 
+</div>
+
 </div>
 
 {% endblock %}

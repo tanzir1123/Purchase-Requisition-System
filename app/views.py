@@ -60,8 +60,7 @@ def dashboard(request):
     is_vendor = request.user.groups.filter(name='Vendor').exists()
     is_purchaser = request.user.groups.filter(name='Purchaser').exists()
     is_finance_officer = request.user.groups.filter(name='Financeofficer').exists()
-    if (is_finance_officer == True):
-        print("dEBUGGG: YES IAM THE FINANCE OFFICER\n\n\n")
+    
 
     if (is_employee == True):
         mydata = Employee.objects.get(user=request.user)
