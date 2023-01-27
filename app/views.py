@@ -33,8 +33,8 @@ def contact(request):
         request,
         'app/contact.html',
         {
-            'title': 'Contact',
-            'message': 'Dr. Yeoh.',
+            'title': 'Feel free to reach out at: ',
+            'message': 'TANZIR',
             'year': datetime.now().year,
         }
     )
@@ -47,8 +47,7 @@ def about(request):
         request,
         'app/about.html',
         {
-            'title': 'ABC System',
-            'message': 'This application processes ...',
+            'message': 'A Software Engineering project to manage purchase requisitions inside a company (from creating PR, until the generation of a PO). The system involves five actors: Employee, Manager, Vendor, Purchaser, and Finance Officer.',
             'year': datetime.now().year,
         }
     )
