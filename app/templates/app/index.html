@@ -2,30 +2,24 @@
 
 {% block content %}
 
-<div class="jumbotron" style = "text-align: center">
-    <h2>Purchase Requisition System</h2>
+<div class="jumbotron" style="text-align: center">
+    <h2 class="fade-in">Welcome to the System!</h2>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Group No</h2>
-        <p>TT1L - G4</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Members</h2>
-        <p class="font-weight-bold">Shaon, Tanzir Ahmed</p>
-        <p class="font-weight-bold">Shaily, Fahima Hassan</p>
-        <p class="font-weight-bold">Anis Hazirah Binti Mohamad Sabry</p>
-        <p class="font-weight-bold">Nuha Awadah Binti Mohd Yusof</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Actors</h2>
-        <p class="font-weight-bold">Employee, Vendor</p>
-        <p class="font-weight-bold">Finance Officer</p>
-        <p class="font-weight-bold">Manager</p>
-        <p class="font-weight-bold">Purchaser</p>
-    </div>
+<style>
+    .fade-in {
+        animation: fadeIn 1s ease-in;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
 
-</div>
 
 {% endblock %}
